@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>POST and GET Assignment | Web Development Basic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body bgcolor="lightyellow">
+    <h1 align="center">
+      <u>A Simple illustration of both POST and GET Forms</u>
+    </h1>
+    <table cellpadding="60">
+      <tr>
+        <td>
+          <table width="550px">
+            <caption>
+              <h3><u>GET Request Form</u></h3>
+            </caption>
+            <tr>
+              <td>
+                <fieldset>
+                  <legend>Food Rating</legend>
+                  <form action="#" method="get">
+                    <table cellpadding="5">
+                      <tr>
+                        <td><label for="nameTextInput">Your Name:</label></td>
+                        <td>
+                          <input
+                            type="text"
+                            name="userName"
+                            id="nameTextInput"
+                            required
+                            placeholder="Bikash"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label for="dishTextInput">The Dish Name:</label>
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            name="dishName"
+                            id="dishTextInput"
+                            required
+                            placeholder="Chicken Wings.."
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label for="foodRatingRange">Give it a rating:</label>
+                        </td>
+                        <td>
+                          <input
+                            type="range"
+                            min="1"
+                            max="5"
+                            name="foodRating"
+                            id="foodRatingRange"
+                            required
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label for="opinionTextArea">Any Feedback:</label>
+                        </td>
+                        <td>
+                          <textarea
+                            rows="5"
+                            cols="50"
+                            id="opinionTextArea"
+                            name="dishFeedback"
+                          ></textarea>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <input
+                            style="display:block;margin-left: auto;margin-right: auto;"
+                            type="submit"
+                            value="SUBMIT"
+                          />
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                </fieldset>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table width="550px">
+            <caption>
+              <h3><u>POST Request Form</u></h3>
+            </caption>
+            <tr>
+              <td>
+                <fieldset>
+                  <legend>Food Rating</legend>
+                  <form action="#" method="post">
+                    <table cellpadding="5">
+                      <tr>
+                        <td><label for="nameTextInput">Your Name:</label></td>
+                        <td>
+                          <input
+                            type="text"
+                            name="userName"
+                            id="nameTextInput"
+                            required
+                            placeholder="Bikash"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label for="dishTextInput">The Dish Name:</label>
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            name="dishName"
+                            id="dishTextInput"
+                            required
+                            placeholder="Chicken Wings.."
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label for="foodRatingRange">Give it a rating:</label>
+                        </td>
+                        <td>
+                          <input
+                            type="range"
+                            min="1"
+                            max="5"
+                            name="foodRating"
+                            id="foodRatingRange"
+                            required
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label for="opinionTextArea">Any Feedback:</label>
+                        </td>
+                        <td>
+                          <textarea
+                            rows="5"
+                            cols="50"
+                            id="opinionTextArea"
+                            name="dishFeedback"
+                          ></textarea>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <input
+                            style="display:block;margin-left: auto;margin-right: auto;"
+                            type="submit"
+                            value="SUBMIT"
+                          />
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                </fieldset>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
