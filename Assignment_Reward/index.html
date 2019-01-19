@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Customner Registration | Assignment</title>
+</head>
+
+<body >
+        <img src="./images/banner.png" alt="banner" width="900px" height="200px" style="position: absolute; right: 180px;">
+    <table width="100%">
+        <tr>
+            <td>
+                <img src="./images/logo.png" alt="Our Company" width="200px" height="200px">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table align="center" cellspacing="20" cellpadding="10">
+                    <form action="" method="POST">
+                        <tr>
+                            <td align="right">
+                                <label for="firstNameInput">First Name: </label>
+                            </td>
+                            <td><input type="text" name="firstName" id="firstNameInput"></td>
+                            <td align="right">
+                                <label for="middleNameInput">Middle Name: </label>
+                            </td>
+                            <td><input type="text" name="middleName" id="middleNameInput"></td>
+                            <td align="right">
+                                <label for="lastNameInput">Last Name: </label>
+                            </td>
+                            <td><input type="text" name="lastName" id="lastNameInput"></td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <label for="emailInput">Email Id:</label>
+                            </td>
+                            <td><input type="email" name="emailId" id="emailInput"></td>
+                            <td colspan="4" align="left"><i>(note*: This email will be used as your login id)</i></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><label for="passwordInput">Password: </label></td>
+                            <td>
+                                <input type="password" name="password" id="passwordInput">
+                            </td>
+                            <td colspan="4"><i>(note*: Password should be strong enough for account security)</i></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><label for="phoneNumber1">Cellphone 1</label></td>
+                            <td><input type="number" name="phoneNumberPersonal" id="phoneNumber1"></td>
+                            <td align="right"><label for="phoneNumber2">Cellphone 2</label></td>
+                            <td colspan="3"><input type="number" name="phoneNumberWorking" id="phoneNumber2"></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><label for="genderRadio">Gender : </label></td>
+                            <td><input type="radio" name="gender" id="genderMRadio"> Male</td>
+                            <td colspan="4"><input type="radio" name="gender" id="genderFRadio"> Female</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><label for="addressInput">Current Address</label></td>
+                            <td><input type="text" name="address" id="addressInput"></td>
+                            <td align="right"><label for="addressInput">City: </label></td>
+                            <td><input type="text" name="city" id="cityInput"></td>
+                            <td align="right"><label for="addressInput">State: </label></td>
+                            <td><input type="text" name="state" id="stateInput"></td>
+                        </tr>
+
+                        <tr>
+                            <td align="right"><label for="addressInput">Permanent Address</label></td>
+                            <td><input type="text" name="address" id="addressInput"></td>
+                            <td align="right"><label for="addressInput">City: </label></td>
+                            <td><input type="text" name="city" id="cityInput"></td>
+                            <td align="right"><label for="addressInput">State: </label></td>
+                            <td><input type="text" name="state" id="stateInput"></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><label for="dobInput">Date of Birth: </label></td>
+                            <td><input type="datetime" name="dob" id="dobInput"></td>
+                            <td colspan="4"><i>(note*: date should be in the specified format like dd/mm/yyyy)</i></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><label for="interestSelect">Personal interest: </label></td>
+                            <td>
+                                <select name="personalInterest" id="personalInterestSelect" multiple="true">
+                                    <option value="Reading">Reading</option>
+                                    <option value="Singing">Singing</option>
+                                    <option value="Playing Outdoor Games">Playing Outdoor Games</option>
+                                    <option value="Hiking">Hiking</option>
+                                    <option value="Swimming">Swimming</option>
+                                    <option value="Studing">Studing</option>
+                                </select>
+                            </td>
+                            <td colspan="4"><i>(note*: For multiple selection hold <kbd>CTRL</kbd> and select the desired interests.</i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="right"><input type="submit" value="SUBMIT"></td>
+                            <td colspan="3" align="left"><input type="reset" value="RESET"></td>
+                        </tr>
+                    </form>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
