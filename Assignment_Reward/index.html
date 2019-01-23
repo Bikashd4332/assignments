@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td>
-                <table align="center" cellspacing="20" cellpadding="10">
+                <table align="center" cellspacing="5" cellpadding="10">
                     <form action="" method="POST">
                         <tr>
                             <td align="right">
@@ -46,22 +46,26 @@
                             <td>
                                 <input type="password" name="password" id="passwordInput">
                             </td>
-                            <td colspan="4"><i>(note*: Password should be strong enough for account security)</i></td>
+                            <td align="right"><label for="passwordInput">Confirm Password: </label></td>
+                            <td>
+                                <input type="password" name="confirmPassword" id="passwordInput">
+                            </td>
+                            <td colspan="2"><i>(note*: Password should be strong enough for account security)</i></td>
                         </tr>
                         <tr>
-                            <td align="right"><label for="phoneNumber1">Cellphone 1</label></td>
+                            <td align="right"><label for="phoneNumber1">Primary Cellphone</label></td>
                             <td><input type="number" name="phoneNumberPersonal" id="phoneNumber1"></td>
-                            <td align="right"><label for="phoneNumber2">Cellphone 2</label></td>
+                            <td align="right"><label for="phoneNumber2">Alternate Cellphone</label></td>
                             <td colspan="3"><input type="number" name="phoneNumberWorking" id="phoneNumber2"></td>
                         </tr>
                         <tr>
                             <td align="right"><label for="genderRadio">Gender : </label></td>
-                            <td><input type="radio" name="gender" id="genderMRadio"> Male</td>
-                            <td colspan="4"><input type="radio" name="gender" id="genderFRadio"> Female</td>
+                            <td colspan="4"><input type="radio" name="gender" id="genderMRadio"> Male&nbsp; &nbsp; &nbsp;&nbsp;
+                            <input type="radio" name="gender" id="genderFRadio"> Female</td>
                         </tr>
                         <tr>
                             <td align="right"><label for="addressInput">Current Address</label></td>
-                            <td><input type="text" name="address" id="addressInput"></td>
+                            <td><textarea name="currentAddress" id="currentAddressTextArea" cols="30" rows="4"></textarea></td>
                             <td align="right"><label for="addressInput">City: </label></td>
                             <td><input type="text" name="city" id="cityInput"></td>
                             <td align="right"><label for="addressInput">State: </label></td>
@@ -70,7 +74,7 @@
 
                         <tr>
                             <td align="right"><label for="addressInput">Permanent Address</label></td>
-                            <td><input type="text" name="address" id="addressInput"></td>
+                            <td><textarea name="permanentAddress" id="permanentAddressTextArea" cols="30" rows="4"></textarea></td>
                             <td align="right"><label for="addressInput">City: </label></td>
                             <td><input type="text" name="city" id="cityInput"></td>
                             <td align="right"><label for="addressInput">State: </label></td>
