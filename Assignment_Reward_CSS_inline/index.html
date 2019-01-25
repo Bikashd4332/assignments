@@ -23,6 +23,7 @@
         border: none;
         outline: none;
         opacity: 0.7;
+        transition: 300ms ;
       }
 
       input[type="text"]:focus,
@@ -32,6 +33,11 @@
       [type="password"]:focus,
       [type="number"]:focus {
         box-shadow: 1px 10px 25px rgba(0, 0, 0, 0.3);
+        transition: box-shadow ease-in-out 200ms;         
+      }
+
+      button {
+        cursor: pointer;
       }
     </style>
 </head>
@@ -48,14 +54,14 @@
     <div style="width: 600px; margin:auto; padding-left: 50px;padding-right: 50px; padding-bottom: 30px;background-color: rgba(255, 255, 255, 0.3); border-radius: 20px; box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.3)">
       <div class="fa fa-user-circle-o" style="width: 15px; height: 150px; font-size: 150px; position: relative; left: 32%; margin: 40px; color: rgba(0, 0, 0, 0.4);" aria-hidden="true"></div>
       <form method="POST" action="">
-        <input type="text" style="width: 344px" placeholder="First Name" name="firstNameInput" />
-        <input type="text" style="width: 200px;margin: 5px 0px 5px 4px;""
-          name=" lastNameInput" placeholder="Last Name" />
-        <input type="text" style="width: 59%; margin: 5px 0px 5px;" name="emailId" id="emailIdInput" placeholder="Email" />
+        <input type="text" style="width: 344px" required placeholder="First Name *" name="firstNameInput" />
+        <input type="text" style="width: 200px;margin: 5px 0px 5px 4px;" required
+          name=" lastNameInput" placeholder="Last Name *" />
+        <input type="text" style="width: 59%; margin: 5px 0px 5px;" required  name="emailId" id="emailIdInput" placeholder="Email *" />
         <span style="font-size: 29px; position: relative; top: 5px;">@</span>
-        <input type="text" style="width: 27%; margin: 20px 0px 5px;" name="emailDomain" placeholder="Domain" />
-        <input type="password" style="width: 96%; margin: 20px 0px 5px;" name="password" placeholder="Password" />
-        <input type="password" style="width: 96%; margin: 20px 0px 5px;" name="passwordConfirmation" placeholder="Re-enter Password" />
+        <input type="text" required style="width: 27%; margin: 20px 0px 5px;" name="emailDomain" placeholder="Domain *" />
+        <input type="password" required style="width: 96%; margin: 20px 0px 5px;" name="password" placeholder="Password *" />
+        <input type="password" required style="width: 96%; margin: 20px 0px 5px;" name="passwordConfirmation" placeholder="Re-enter Password *" />
         <div style="height: 35px; width: 98%; background-color: rgba(255, 255, 255, 0.6); border-radius: 5px; margin: 20px 0px 5px; padding: 5px;">
           <label style="color: slategray;position: relative; top: 3px; margin: 5px;font-size: 1.2em; font-weight: 400; font-family: Arial, Helvetica, sans-serif">Select
             Gender :
@@ -70,9 +76,9 @@
               checked />
           </div>
         </div>
-        <input type="text" style="width: 250px; margin: 20px 0px 5px; " name="primaryCellPhone" placeholder="Primary Cell Phone" />
+        <input type="text" required style="width: 250px; margin: 20px 0px 5px; " name="primaryCellPhone" placeholder="Primary Cell Phone *" />
         <input type="text" style="width: 304px; margin: 20px 0px 5px;" name="secondaryPhoneNumber" placeholder="Alternative Cell Phone" />
-        <input type="text" style="width: 97%; margin: 20px 0px 5px; " name="permanentAddress" placeholder="Current Address" />
+        <input type="text" required style="width: 97%; margin: 20px 0px 5px; " name="permanentAddress" placeholder="Current Address" />
         <select style="width: 49%;height: 45px; margin: 20px 0px 5px; " name="Country" id="countrySelect">
           <option value="Afghanistan">Afghanistan</option>
           <option value="Albania">Albania</option>
@@ -314,9 +320,10 @@
           <option value="Zambia">Zambia</option>
           <option value="Zimbabwe">Zimbabwe</option>
         </select>
-        <input type="text" style="width: 280px; margin: 20px 0px 5px; " name="currentState" placeholder="Current State" />
-        <input type="text" style="width: 97%; margin: 20px 0px 5px; " name="permanentAddress" placeholder="Permanent Address" />
-        <select style="width: 49%;height: 45px; margin: 20px 0px 5px; " name="permanetCountry" id="permanentCountrySelect">
+        <input type="text" required style="width: 280px; margin: 20px 0px 5px; " name="currentState" placeholder="Current State" />
+        <input type="text" required style="width: 96%; margin: 20px 0px 5px;" name="currentZipCode" placeholder="Current Zip Code" />
+        <input type="text" required style="width: 97%; margin: 20px 0px 5px; " name="permanentAddress" placeholder="Permanent Address *" />
+        <select required style="width: 49%;height: 45px; margin: 20px 0px 5px; " name="permanetCountry" id="permanentCountrySelect">
           <option value="Afghanistan">Afghanistan</option>
           <option value="Albania">Albania</option>
           <option value="Algeria">Algeria</option>
@@ -557,7 +564,8 @@
           <option value="Zambia">Zambia</option>
           <option value="Zimbabwe">Zimbabwe</option>
         </select>
-        <input type="text" style="width: 280px; margin: 20px 0px 5px; " name="permanentState" placeholder="Permanent State" />
+        <input type="text" required style="width: 280px; margin: 20px 0px 5px; " name="permanentState" placeholder="Permanent State *" />
+        <input type="text" required style="width: 96%; margin: 20px 0px 5px;" name="permenentZipCode" placeholder="Permanent Zip Code *" />
         <div style="height: 35px; width: 98%; background-color: rgba(255, 255, 255, 0.6); border-radius: 5px; margin: 20px 0px 5px; padding: 5px;">
           <label style="color: slategray;position: relative; top: 3px; margin: 5px;font-size: 1.2em; font-weight: 400; font-family: Arial, Helvetica, sans-serif">
             Subsctibe to Newsletter :

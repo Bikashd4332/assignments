@@ -25,7 +25,7 @@
           type="text"
           id="firstNameInput"
           required
-          placeholder="First Name"
+          placeholder="First Name *"
           name="firstName"
         />
         <input
@@ -33,14 +33,14 @@
           id="lastNameInput"
           required
           name=" lastName"
-          placeholder="Last Name"
+          placeholder="Last Name *"
         />
         <input
           type="text"
           required
           name="emailId"
           id="emailIdInput"
-          placeholder="Email"
+          placeholder="Email *"
         />
         <span id="AtSign">@</span>
         <input
@@ -48,24 +48,24 @@
           required
           name="emailDomain"
           id="emailDomainInput"
-          placeholder="Domain"
+          placeholder="Domain *"
         />
         <input
           type="password"
           required
           name="password"
           id="passwordInput"
-          placeholder="Password"
+          placeholder="Password *"
         />
         <input
           type="password"
           required
           id="passwordConfirmationInput"
           name="passwordConfirmation"
-          placeholder="Re-enter Password"
+          placeholder="Re-enter Password *"
         />
         <div class="radio-group">
-          <label class="radio-group-label">Select Gender : </label>
+          <label class="radio-group-label">Select Gender * : </label>
           <div class="radios">
             <label class="radio-label">Male</label>
             <input type="radio" class="radio-control" name="gender" />
@@ -85,7 +85,7 @@
           required
           id="primaryCellPhoneInput"
           name="primaryCellPhone"
-          placeholder="Primary Cell Phone"
+          placeholder="Primary Cell Phone *"
         />
         <input
           type="text"
@@ -98,10 +98,10 @@
           required
           id="permanentAddressInput"
           name="permanentAddress"
-          placeholder="Current Address"
+          placeholder="Permanent Address *"
         />
         <select
-          name="Country"
+          name="Country *"
           id="countrySelect"
         >
           <option value="Afghanistan">Afghanistan</option>
@@ -375,14 +375,17 @@
           id="currentStateInput"
           required
           name="currentState"
-          placeholder="Current State"
+          placeholder="Permanent State *"
         />
+        
+        <input type="text" required id="currentZipCodeInput" name="currentZipCode" placeholder="Permanent Zip Code *" />
+
         <input
           type="text"
           required
           id="permanentAddressInput"
           name="permanentAddress"
-          placeholder="Permanent Address"
+          placeholder="Current Address "
         />
         <select required name="permanetCountry" id="permanentCountrySelect">
           <option value="Afghanistan">Afghanistan</option>
@@ -656,8 +659,11 @@
           required
           id="permanentStateInput"
           name="permanentState"
-          placeholder="Permanent State"
+          placeholder="Current State"
         />
+        
+        <input type="text" required id="permanentZipCodeInput" name="permanentZipCode" placeholder="Current Zip Code" />
+
         <div class="radio-group">
           <label class="radio-group-label"> Subsctibe to Newsletter : </label>
           <div class="radios" style="float: right; margin-right: 20px;">
@@ -669,8 +675,8 @@
               name="isSubscribed"
             />
           </div>
-          <div class="radios" style="float: right; margin-right: 20px;">
-            <label class="radio-label" style="color: slategray;">No</label>
+          <div class="radios" >
+            <label class="radio-label">No</label>
             <input type="radio" class="radio-control" name="isSubscribed" />
           </div>
         </div>
