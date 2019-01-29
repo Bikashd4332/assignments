@@ -177,3 +177,14 @@ button {
   width: 97%;
   margin: 20px 0px 5px;
 }
+
+#currentCountrySelect {
+  width: 49%;
+  height: 45px;
+  margin: 20px 0px 5px;
+}
+
+#currentAddressInput {
+  width: 97%;
+  margin: 20px 0px 5px;
+}
