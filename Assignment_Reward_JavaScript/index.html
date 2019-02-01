@@ -21,13 +21,13 @@
     <div class="container">
       <div class="fa fa-user-circle-o form-icon" aria-hidden="true"></div>
       <form method="POST" action="">
-        <input
-          type="text"
-          id="firstNameInput"
-          required
-          placeholder="First Name *"
-          name="firstName"
-        />
+          <input
+            type="text"
+            id="firstNameInput"
+            required
+            placeholder="First Name *"
+            name="firstName"
+          />
         <input
           type="text"
           id="lastNameInput"
@@ -68,7 +68,12 @@
           <label class="radio-group-label">Select Gender * : </label>
           <div class="radios">
             <label class="radio-label">Male</label>
-            <input type="radio" value="male" class="radio-control" name="gender" />
+            <input
+              type="radio"
+              value="male"
+              class="radio-control"
+              name="gender"
+            />
           </div>
           <div class="radios">
             <label class="radio-label">Female</label>
@@ -82,7 +87,12 @@
           </div>
           <div class="radios">
             <label class="radio-label">Other</label>
-            <input type="radio" value="other" class="radio-control" name="gender" />
+            <input
+              type="radio"
+              value="other"
+              class="radio-control"
+              name="gender"
+            />
           </div>
         </div>
         <input
@@ -105,11 +115,8 @@
           name="permanentAddress"
           placeholder="Permanent Address"
         />
-        <select
-          name="Country"
-          id="countrySelect"
-        >
-          <!-- <option value="0"></option>   -->
+        <select name="country" id="countrySelect">
+          <option value="0" selected>Select Country</option>  
           <option value="Afghanistan">Afghanistan</option>
           <option value="Albania">Albania</option>
           <option value="Algeria">Algeria</option>
@@ -382,17 +389,24 @@
           name="permanentState"
           placeholder="Permanent State"
         />
-        
-        <input type="text" required id="permanentZipCodeInput" name="permanentZipCode" placeholder="Permanent Zip Code" />
+
+        <input
+          type="text"
+          required
+          id="permanentZipCodeInput"
+          name="permanentZipCode"
+          placeholder="Zip Code"
+        />
 
         <input
           type="text"
           required
           id="currentAddressInput"
           name="currentAddress"
-        placeholder="Current Address *"
+          placeholder="Current Address *"
         />
         <select required name="currentCountry" id="currentCountrySelect">
+          <option value="0">Select Country</option>
           <option value="Afghanistan">Afghanistan</option>
           <option value="Albania">Albania</option>
           <option value="Algeria">Algeria</option>
@@ -522,7 +536,7 @@
           <option value="Kyrgyzstan">Kyrgyzstan</option>
           <option value="Lao">Lao People's Democratic Republic</option>
           <option value="Latvia">Latvia</option>
-          <option value="Lebanon" selected>Lebanon</option>
+          <option value="Lebanon">Lebanon</option>
           <option value="Lesotho">Lesotho</option>
           <option value="Liberia">Liberia</option>
           <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
@@ -666,12 +680,18 @@
           name="currentState"
           placeholder="Current State *"
         />
-        
-        <input type="text" required id="currentZipCodeInput" name="currentZipCode" placeholder="Current Zip Code *" />
+
+        <input
+          type="text"
+          required
+          id="currentZipCodeInput"
+          name="currentZipCode"
+          placeholder="Zip Code *"
+        />
 
         <div class="radio-group">
           <label class="radio-group-label"> Subsctibe to Newsletter : </label>
-          <div class="radios" >
+          <div class="radios">
             <label class="radio-label">Yes</label>
             <input
               type="radio"
@@ -680,7 +700,7 @@
               name="isSubscribed"
             />
           </div>
-          <div class="radios" >
+          <div class="radios">
             <label class="radio-label">No</label>
             <input type="radio" class="radio-control" name="isSubscribed" />
           </div>
