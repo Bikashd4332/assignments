@@ -7,7 +7,6 @@ input[type="text"],
 select,
 [type="number"] {
   padding: 13px;
-  /* height: 25px; */
   font-size: 1.2em;
   border-radius: 5px;
   border: none;
@@ -69,6 +68,7 @@ select:focus,
   font-size: 29px;
   position: relative;
   top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #passwordInput {
@@ -104,7 +104,7 @@ select:focus,
 }
 body {
   background: -webkit-linear-gradient(to bottom, #11998e, #38ef7d);
-  background: linear-gradient(to bottom, #11998e, #38ef7d);
+  background: linear-gradient(to top, #11998e, #38ef8d);
   font-family: "Balo Thambi", cursive;
   font-weight: 500;
   font-size: 17px;
@@ -114,10 +114,12 @@ body {
   width: 292px;
   margin: 20px 0px 5px 0px;
 }
+
 #secondaryCellPhoneInput {
   width: 292px;
   margin: 20px 0px 5px 5px;
 }
+
 #permanentAddressInput {
   width: 594px;
   margin: 20px 0px 5px;
@@ -132,6 +134,7 @@ body {
   width: 292px;
   margin: 20px 5px 5px 0px;
 }
+
 #currentStateInput {
   width: 292px;
   margin: 20px 0px 5px;
@@ -140,6 +143,7 @@ body {
   width: 292px;
   margin: 20px 0px 5px 5px;
 }
+
 .radios {
   float: right;
   margin-right: 20px;
@@ -173,6 +177,7 @@ button {
   width: 594px;
   margin: 20px 0px 5px;
 }
+
 #currentZipCodeInput {
   width: 594px;
   margin: 20px 0px 5px;
@@ -279,6 +284,8 @@ button {
   position: absolute; 
   display: block;
   top: 0px;
+  text-decoration: none;
+  color: black;
   cursor: pointer;
   right: 5px;
   font-size: 15px;

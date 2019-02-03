@@ -1,6 +1,7 @@
 window.onload = () => {
     const formElements = document.querySelectorAll(".input-group  input");
     const selectElements = document.querySelectorAll(".input-group  select");
+    const captchaRefresh = document.querySelector(".captcha-group .captcha-refresh");
 
     formElements.forEach((formElement) => {
         formElement.addEventListener("focus", showErrorOnFocus, false);
@@ -9,13 +10,17 @@ window.onload = () => {
     });
 
     selectElements.forEach((selectElement) => {
-        // selectElement.addEventListener("focus", showErrorOnFocus, false);
-        // selectElement.addEventListener("blur", hideErrorOnFocusOut, false);
         selectElement.addEventListener("change", removeInvalidIfValidOnSelect, false);
     });
 
     const formElement = document.querySelector("form");
     formElement.onsubmit = validation;
+
+    captchaRefresh.addEventListener("click", captchaRefreshOnClick, false);
+}
+
+function captchaRefreshOnClick(event) {
+    refreshCaptchaWithNewRandomValues(event.target.parentElement);
 }
 
 function showErrorOnFocus(event) {
@@ -24,8 +29,13 @@ function showErrorOnFocus(event) {
     const emptyMsg = errorMsg.querySelector(".empty-msg");
     const invalidMsg = errorMsg.querySelector(".invalid-msg");
 
-    emptyMsg.style.display = "none";
-    invalidMsg.style.display = "none";
+    if (emptyMsg) {
+        emptyMsg.style.display = "none";
+    }
+
+    if (invalidMsg) {
+        invalidMsg.style.display = "none";
+    }
 
     if (event.target.classList.contains("invalid")) {
         if (event.target.validity.valueMissing) {
@@ -85,6 +95,8 @@ function removeInvalidIfValidOnSelect(event) {
 function validation() {
     const formElements = document.querySelectorAll(".input-group  input");
     const selectElements = document.querySelectorAll(".input-group select");
+    const passwordElements = document.querySelectorAll(".input-group input[type='password']");
+    const captchaElements = document.querySelectorAll(".captcha-group input");
     let isAllValid = true;
 
 
@@ -110,6 +122,21 @@ function validation() {
         }
     });
 
+    captchaElements.forEach((captchaElement) => {
+        if (!isCaptchaCorrect(captchaElement)) {
+            isAllValid = false;
+            refreshCaptchaWithNewRandomValues(captchaElement);
+            console.log("wrong");
+        }
+    });
+
+    if (!isPasswordMatched(passwordElements)) {
+        const parentInputGroup = passwordElements[1].parentElement;
+        const errorIcon = parentInputGroup.querySelector(".error-icon");
+        errorIcon.style.display = "block";
+        passwordElements[1].classList.add("invalid");
+        isAllValid = false;
+    }
 
     return isAllValid;
 }
@@ -120,4 +147,42 @@ function isValid(formElement) {
         return true;
     }
     return false;
+}
+
+
+function isPasswordMatched(passwordElements) {
+    return passwordElements[0].value === passwordElements[1].value;
+}
+
+
+function isCaptchaCorrect(captchaElement) {
+    const captchaImg = captchaElement.parentElement.querySelector(".captcha-image > img");
+    const numString = captchaImg.src.split("=")[1];
+    const enteredValue = captchaElement.value;
+
+    if (enteredValue == "") {
+        return false;
+    } else {
+        return eval(numString) === Number(enteredValue);
+    }
+}
+
+function refreshCaptchaWithNewRandomValues(captchaElement) {
+
+    let parentCaptchaInputGroup = captchaElement.parentElement;
+    let captchaImg = parentCaptchaInputGroup.querySelector(".captcha-image > img");
+    let captchaURL = "https://dummyimage.com/100x40/E1F3F1/f0731f.gif&text=";
+
+    var getRandomOperator = () => {
+        const operators = ['-', '*'];
+        return operators[Math.floor(Math.random(1, 9) * 2)];
+    }
+
+    var getRandomOperands = () => {
+        const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        return numbers[Math.floor(Math.random(1, 9) * 9)];
+    }
+
+    captchaImg.src = captchaURL + getRandomOperands() + getRandomOperator() + getRandomOperands();
+
 }

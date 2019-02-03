@@ -376,15 +376,18 @@
 
 
       <div class="input-group">
-        <div class="error-msg"></div>
+        <div class="error-msg">
+          <p class="invalid-msg">This state name is invalid.</p>
+          <i class="sqare"></i>
+        </div>
         <i class="fa fa-exclamation-circle error-icon"></i>
         <input type="text" id="permanentStateInput" name="permanentState" placeholder="Permanent State" pattern="[a-zA-Z]+" />
       </div>
 
       <div class="input-group">
         <div class="error-msg">
-          <p class="invalid-msg">The Entered pin is invalid.</p>
-          
+          <p class="invalid-msg">The Entered pin is invalid.</p>  
+          <i class="sqare"></i>
         </div>
         <i class="fa fa-exclamation-circle error-icon"></i>
         <input type="text" id="permanentZipCodeInput" name="permanentZipCode" placeholder="Zip Code" pattern="[0-9]{5,6}" />
@@ -684,8 +687,8 @@
       </div>
       <div class="captcha-group">
         <div class="captcha-label">Please Fill the CAPTCHA.</div>
-        <div class="captcha-image"><img src="https://dummyimage.com/100x40/E6FDEF/f0731f.gif&text=3-3" alt="CAPTCHA"></div>
-        <a class="captcha-refresh"><i class="fa fa-refresh"></i></a>
+        <div class="captcha-image"><img src="https://dummyimage.com/100x40/E1F3F1/f0731f.gif&text=3-3" alt="CAPTCHA"></div>
+        <div class="captcha-refresh" ><i class="fa fa-refresh"></i></div>
         <input type="number"  min="0" max="9" maxlength="1" placeholder="=">
       </div>
       <button type="submit">Make me registered</button>
