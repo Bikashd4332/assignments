@@ -1,122 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Customner Registration | Assignment</title>
-    <link
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Baloo+Thambi"
-      rel="stylesheet"
-    />
 
-    <link href="css/style.css" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Customner Registration | Assignment</title>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet" />
 
-  <body>
-    <div class="container">
-      <div class="fa fa-user-circle-o form-icon" aria-hidden="true"></div>
-      <form method="POST" action="">
-          <input
-            type="text"
-            id="firstNameInput"
-            required
-            placeholder="First Name *"
-            name="firstName"
-          />
-        <input
-          type="text"
-          id="lastNameInput"
-          required
-          name=" lastName"
-          placeholder="Last Name *"
-        />
-        <input
-          type="text"
-          required
-          name="emailId"
-          id="emailIdInput"
-          placeholder="Email *"
-        />
-        <span id="AtSign">@</span>
-        <input
-          type="text"
-          required
-          name="emailDomain"
-          id="emailDomainInput"
-          placeholder="Domain *"
-        />
-        <input
-          type="password"
-          required
-          name="password"
-          id="passwordInput"
-          placeholder="Password *"
-        />
-        <input
-          type="password"
-          required
-          id="passwordConfirmationInput"
-          name="passwordConfirmation"
-          placeholder="Re-enter Password *"
-        />
-        <div class="radio-group">
-          <label class="radio-group-label">Select Gender * : </label>
-          <div class="radios">
-            <label class="radio-label">Male</label>
-            <input
-              type="radio"
-              value="male"
-              class="radio-control"
-              name="gender"
-            />
-          </div>
-          <div class="radios">
-            <label class="radio-label">Female</label>
-            <input
-              value="female"
-              type="radio"
-              class="radio-control"
-              name="gender"
-              checked
-            />
-          </div>
-          <div class="radios">
-            <label class="radio-label">Other</label>
-            <input
-              type="radio"
-              value="other"
-              class="radio-control"
-              name="gender"
-            />
-          </div>
+  <script src="./js/styling.js"></script>
+  <script src="./js/validation.js"></script>
+
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="fa fa-user-circle-o form-icon" aria-hidden="true"></div>
+    <form method="POST" action="" novalidate>
+      <div class="input-group">
+        <div class="error-msg" id="firstNameErrorMsg">
+          <p class="invalid-msg">The Entered First Name is Invalid.</p>
+          <p class="empty-msg">First Name Can't Be Left.</p>
+          <i class="sqare"></i>
         </div>
-        <input
-          type="text"
-          required
-          id="primaryCellPhoneInput"
-          name="primaryCellPhone"
-          placeholder="Primary Cell Phone *"
-        />
-        <input
-          type="text"
-          id="secondaryCellPhoneInput"
-          name="secondaryPhoneNumber"
-          placeholder="Alternative Cell Phone"
-        />
-        <input
-          type="text"
-          required
-          id="permanentAddressInput"
-          name="permanentAddress"
-          placeholder="Permanent Address"
-        />
+        <i class="fa fa-exclamation-circle top error-icon"></i>
+        <input type="text" id="firstNameInput" required placeholder="First Name *" name="firstName" pattern="[a-zA-Z]+" />
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="invalid-msg">The Entered Last Name is invalid.</p>
+          <p class="empty-msg">Surname Can't be Left.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle top error-icon"></i>
+        <input type="text" id="lastNameInput" required name=" lastName" placeholder="Last Name *" pattern="[a-zA-Z]+" />
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="invalid-msg">Please Enter a Valid User Name.</p>
+          <p class="empty-msg">You Can Not Omit Username part.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" required name="emailId" id="emailIdInput" placeholder="Email *" pattern="[a-zA-Z0-9\.]+" />
+      </div>
+
+      <span id="AtSign">@</span>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="invalid-msg">Invalid Domain Entered.</p>
+          <p class="empty-msg">Domain Can't Be Empty.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" required name="emailDomain" id="emailDomainInput" placeholder="Domain *" pattern="[a-zA-Z]*(\.co)?\.([a-z]{2,3})" />
+      </div>
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="empty-msg">Password Field Must Be Filled Up.</p>
+          <p class="invalid-msg">The password is too short.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="password" required name="password" id="passwordInput" placeholder="Password *" />
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg" id="passwordConfirmationInputErrorMsg">
+          <p class="empty-msg">Confirm by writing the same password again.</p>
+          <p class="invalid-msg">Doesn't match with the password.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="password" required id="passwordConfirmationInput" name="passwordConfirmation" placeholder="Re-enter Password *" />
+      </div>
+
+      <div class="radio-group">
+        <label class="radio-group-label">Select Gender * : </label>
+        <div class="radios">
+          <label class="radio-label">Male</label>
+          <input type="radio" value="male" class="radio-control" name="gender" />
+        </div>
+        <div class="radios">
+          <label class="radio-label">Female</label>
+          <input value="female" type="radio" class="radio-control" name="gender" checked />
+        </div>
+        <div class="radios">
+          <label class="radio-label">Other</label>
+          <input type="radio" value="other" class="radio-control" name="gender" />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="empty-msg">Phone number must be filled up.</p>
+          <p class="invalid-msg">Phone number can only numbers.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" required id="primaryCellPhoneInput" name="primaryCellPhone" placeholder="Primary Cell Phone *"
+          pattern="[0-9]{10}" />
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="invalid-msg">Phone number can only numbers.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" id="secondaryCellPhoneInput" name="secondaryPhoneNumber" placeholder="Alternative Cell Phone"
+          pattern="[0-9]{10}" />
+      </div>
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="empty-msg">Address needs to be filled up.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" id="permanentAddressInput" name="permanentAddress" placeholder="Permanent Address" />
+      </div>
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="empty-msg">Please select your permanent country.</p>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
         <select name="country" id="countrySelect">
-          <option value="0" selected>Select Country</option>  
+          <option value="0" selected>Select Country</option>
           <option value="Afghanistan">Afghanistan</option>
           <option value="Albania">Albania</option>
           <option value="Algeria">Algeria</option>
@@ -147,9 +161,7 @@
           <option value="Botswana">Botswana</option>
           <option value="Bouvet Island">Bouvet Island</option>
           <option value="Brazil">Brazil</option>
-          <option value="British Indian Ocean Territory"
-            >British Indian Ocean Territory</option
-          >
+          <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
           <option value="Brunei Darussalam">Brunei Darussalam</option>
           <option value="Bulgaria">Bulgaria</option>
           <option value="Burkina Faso">Burkina Faso</option>
@@ -159,9 +171,7 @@
           <option value="Canada">Canada</option>
           <option value="Cape Verde">Cape Verde</option>
           <option value="Cayman Islands">Cayman Islands</option>
-          <option value="Central African Republic"
-            >Central African Republic</option
-          >
+          <option value="Central African Republic">Central African Republic</option>
           <option value="Chad">Chad</option>
           <option value="Chile">Chile</option>
           <option value="China">China</option>
@@ -198,9 +208,7 @@
           <option value="France Metropolitan">France, Metropolitan</option>
           <option value="French Guiana">French Guiana</option>
           <option value="French Polynesia">French Polynesia</option>
-          <option value="French Southern Territories"
-            >French Southern Territories</option
-          >
+          <option value="French Southern Territories">French Southern Territories</option>
           <option value="Gabon">Gabon</option>
           <option value="Gambia">Gambia</option>
           <option value="Georgia">Georgia</option>
@@ -217,9 +225,7 @@
           <option value="Guinea-Bissau">Guinea-Bissau</option>
           <option value="Guyana">Guyana</option>
           <option value="Haiti">Haiti</option>
-          <option value="Heard and McDonald Islands"
-            >Heard and Mc Donald Islands</option
-          >
+          <option value="Heard and McDonald Islands">Heard and Mc Donald Islands</option>
           <option value="Holy See">Holy See (Vatican City State)</option>
           <option value="Honduras">Honduras</option>
           <option value="Hong Kong">Hong Kong</option>
@@ -238,9 +244,7 @@
           <option value="Kazakhstan">Kazakhstan</option>
           <option value="Kenya">Kenya</option>
           <option value="Kiribati">Kiribati</option>
-          <option value="Democratic People's Republic of Korea"
-            >Korea, Democratic People's Republic of</option
-          >
+          <option value="Democratic People's Republic of Korea">Korea, Democratic People's Republic of</option>
           <option value="Korea">Korea, Republic of</option>
           <option value="Kuwait">Kuwait</option>
           <option value="Kyrgyzstan">Kyrgyzstan</option>
@@ -253,9 +257,7 @@
           <option value="Lithuania">Lithuania</option>
           <option value="Luxembourg">Luxembourg</option>
           <option value="Macau">Macau</option>
-          <option value="Macedonia"
-            >Macedonia, The Former Yugoslav Republic of</option
-          >
+          <option value="Macedonia">Macedonia, The Former Yugoslav Republic of</option>
           <option value="Madagascar">Madagascar</option>
           <option value="Malawi">Malawi</option>
           <option value="Malaysia">Malaysia</option>
@@ -288,9 +290,7 @@
           <option value="Nigeria">Nigeria</option>
           <option value="Niue">Niue</option>
           <option value="Norfolk Island">Norfolk Island</option>
-          <option value="Northern Mariana Islands"
-            >Northern Mariana Islands</option
-          >
+          <option value="Northern Mariana Islands">Northern Mariana Islands</option>
           <option value="Norway">Norway</option>
           <option value="Oman">Oman</option>
           <option value="Pakistan">Pakistan</option>
@@ -311,9 +311,7 @@
           <option value="Rwanda">Rwanda</option>
           <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
           <option value="Saint LUCIA">Saint LUCIA</option>
-          <option value="Saint Vincent"
-            >Saint Vincent and the Grenadines</option
-          >
+          <option value="Saint Vincent">Saint Vincent and the Grenadines</option>
           <option value="Samoa">Samoa</option>
           <option value="San Marino">San Marino</option>
           <option value="Sao Tome and Principe">Sao Tome and Principe</option>
@@ -327,15 +325,11 @@
           <option value="Solomon Islands">Solomon Islands</option>
           <option value="Somalia">Somalia</option>
           <option value="South Africa">South Africa</option>
-          <option value="South Georgia"
-            >South Georgia and the South Sandwich Islands</option
-          >
+          <option value="South Georgia">South Georgia and the South Sandwich Islands</option>
           <option value="Span">Spain</option>
           <option value="SriLanka">Sri Lanka</option>
           <option value="St. Helena">St. Helena</option>
-          <option value="St. Pierre and Miguelon"
-            >St. Pierre and Miquelon</option
-          >
+          <option value="St. Pierre and Miguelon">St. Pierre and Miquelon</option>
           <option value="Sudan">Sudan</option>
           <option value="Suriname">Suriname</option>
           <option value="Svalbard">Svalbard and Jan Mayen Islands</option>
@@ -361,50 +355,58 @@
           <option value="United Arab Emirates">United Arab Emirates</option>
           <option value="United Kingdom">United Kingdom</option>
           <option value="United States">United States</option>
-          <option value="United States Minor Outlying Islands"
-            >United States Minor Outlying Islands</option
-          >
+          <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
           <option value="Uruguay">Uruguay</option>
           <option value="Uzbekistan">Uzbekistan</option>
           <option value="Vanuatu">Vanuatu</option>
           <option value="Venezuela">Venezuela</option>
           <option value="Vietnam">Viet Nam</option>
-          <option value="Virgin Islands (British)"
-            >Virgin Islands (British)</option
-          >
+          <option value="Virgin Islands (British)">Virgin Islands (British)</option>
           <option value="Virgin Islands (U.S)">Virgin Islands (U.S.)</option>
-          <option value="Wallis and Futana Islands"
-            >Wallis and Futuna Islands</option
-          >
+          <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
           <option value="Western Sahara">Western Sahara</option>
           <option value="Yemen">Yemen</option>
           <option value="Yugoslavia">Yugoslavia</option>
           <option value="Zambia">Zambia</option>
           <option value="Zimbabwe">Zimbabwe</option>
         </select>
-        <input
-          type="text"
-          id="permanentStateInput"
-          required
-          name="permanentState"
-          placeholder="Permanent State"
-        />
 
-        <input
-          type="text"
-          required
-          id="permanentZipCodeInput"
-          name="permanentZipCode"
-          placeholder="Zip Code"
-        />
+      </div>
 
-        <input
-          type="text"
-          required
-          id="currentAddressInput"
-          name="currentAddress"
-          placeholder="Current Address *"
-        />
+
+
+      <div class="input-group">
+        <div class="error-msg"></div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" id="permanentStateInput" name="permanentState" placeholder="Permanent State" pattern="[a-zA-Z]+" />
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="invalid-msg">The Entered pin is invalid.</p>
+          
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" id="permanentZipCodeInput" name="permanentZipCode" placeholder="Zip Code" pattern="[0-9]{5,6}" />
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="empty-msg">This is needed so that we can reach you.</p>
+          <p class="invalid-msg">This entered address is invalid.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" required id="currentAddressInput" name="currentAddress" placeholder="Current Address *" />
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="empty-msg">Please select your current Country.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+
         <select required name="currentCountry" id="currentCountrySelect">
           <option value="0">Select Country</option>
           <option value="Afghanistan">Afghanistan</option>
@@ -437,9 +439,7 @@
           <option value="Botswana">Botswana</option>
           <option value="Bouvet Island">Bouvet Island</option>
           <option value="Brazil">Brazil</option>
-          <option value="British Indian Ocean Territory"
-            >British Indian Ocean Territory</option
-          >
+          <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
           <option value="Brunei Darussalam">Brunei Darussalam</option>
           <option value="Bulgaria">Bulgaria</option>
           <option value="Burkina Faso">Burkina Faso</option>
@@ -449,9 +449,7 @@
           <option value="Canada">Canada</option>
           <option value="Cape Verde">Cape Verde</option>
           <option value="Cayman Islands">Cayman Islands</option>
-          <option value="Central African Republic"
-            >Central African Republic</option
-          >
+          <option value="Central African Republic">Central African Republic</option>
           <option value="Chad">Chad</option>
           <option value="Chile">Chile</option>
           <option value="China">China</option>
@@ -488,9 +486,7 @@
           <option value="France Metropolitan">France, Metropolitan</option>
           <option value="French Guiana">French Guiana</option>
           <option value="French Polynesia">French Polynesia</option>
-          <option value="French Southern Territories"
-            >French Southern Territories</option
-          >
+          <option value="French Southern Territories">French Southern Territories</option>
           <option value="Gabon">Gabon</option>
           <option value="Gambia">Gambia</option>
           <option value="Georgia">Georgia</option>
@@ -507,9 +503,7 @@
           <option value="Guinea-Bissau">Guinea-Bissau</option>
           <option value="Guyana">Guyana</option>
           <option value="Haiti">Haiti</option>
-          <option value="Heard and McDonald Islands"
-            >Heard and Mc Donald Islands</option
-          >
+          <option value="Heard and McDonald Islands">Heard and Mc Donald Islands</option>
           <option value="Holy See">Holy See (Vatican City State)</option>
           <option value="Honduras">Honduras</option>
           <option value="Hong Kong">Hong Kong</option>
@@ -528,9 +522,7 @@
           <option value="Kazakhstan">Kazakhstan</option>
           <option value="Kenya">Kenya</option>
           <option value="Kiribati">Kiribati</option>
-          <option value="Democratic People's Republic of Korea"
-            >Korea, Democratic People's Republic of</option
-          >
+          <option value="Democratic People's Republic of Korea">Korea, Democratic People's Republic of</option>
           <option value="Korea">Korea, Republic of</option>
           <option value="Kuwait">Kuwait</option>
           <option value="Kyrgyzstan">Kyrgyzstan</option>
@@ -544,9 +536,7 @@
           <option value="Lithuania">Lithuania</option>
           <option value="Luxembourg">Luxembourg</option>
           <option value="Macau">Macau</option>
-          <option value="Macedonia"
-            >Macedonia, The Former Yugoslav Republic of</option
-          >
+          <option value="Macedonia">Macedonia, The Former Yugoslav Republic of</option>
           <option value="Madagascar">Madagascar</option>
           <option value="Malawi">Malawi</option>
           <option value="Malaysia">Malaysia</option>
@@ -579,9 +569,7 @@
           <option value="Nigeria">Nigeria</option>
           <option value="Niue">Niue</option>
           <option value="Norfolk Island">Norfolk Island</option>
-          <option value="Northern Mariana Islands"
-            >Northern Mariana Islands</option
-          >
+          <option value="Northern Mariana Islands">Northern Mariana Islands</option>
           <option value="Norway">Norway</option>
           <option value="Oman">Oman</option>
           <option value="Pakistan">Pakistan</option>
@@ -602,9 +590,7 @@
           <option value="Rwanda">Rwanda</option>
           <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
           <option value="Saint LUCIA">Saint LUCIA</option>
-          <option value="Saint Vincent"
-            >Saint Vincent and the Grenadines</option
-          >
+          <option value="Saint Vincent">Saint Vincent and the Grenadines</option>
           <option value="Samoa">Samoa</option>
           <option value="San Marino">San Marino</option>
           <option value="Sao Tome and Principe">Sao Tome and Principe</option>
@@ -618,15 +604,11 @@
           <option value="Solomon Islands">Solomon Islands</option>
           <option value="Somalia">Somalia</option>
           <option value="South Africa">South Africa</option>
-          <option value="South Georgia"
-            >South Georgia and the South Sandwich Islands</option
-          >
+          <option value="South Georgia">South Georgia and the South Sandwich Islands</option>
           <option value="Span">Spain</option>
           <option value="SriLanka">Sri Lanka</option>
           <option value="St. Helena">St. Helena</option>
-          <option value="St. Pierre and Miguelon"
-            >St. Pierre and Miquelon</option
-          >
+          <option value="St. Pierre and Miguelon">St. Pierre and Miquelon</option>
           <option value="Sudan">Sudan</option>
           <option value="Suriname">Suriname</option>
           <option value="Svalbard">Svalbard and Jan Mayen Islands</option>
@@ -652,61 +634,63 @@
           <option value="United Arab Emirates">United Arab Emirates</option>
           <option value="United Kingdom">United Kingdom</option>
           <option value="United States">United States</option>
-          <option value="United States Minor Outlying Islands"
-            >United States Minor Outlying Islands</option
-          >
+          <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
           <option value="Uruguay">Uruguay</option>
           <option value="Uzbekistan">Uzbekistan</option>
           <option value="Vanuatu">Vanuatu</option>
           <option value="Venezuela">Venezuela</option>
           <option value="Vietnam">Viet Nam</option>
-          <option value="Virgin Islands (British)"
-            >Virgin Islands (British)</option
-          >
+          <option value="Virgin Islands (British)">Virgin Islands (British)</option>
           <option value="Virgin Islands (U.S)">Virgin Islands (U.S.)</option>
-          <option value="Wallis and Futana Islands"
-            >Wallis and Futuna Islands</option
-          >
+          <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
           <option value="Western Sahara">Western Sahara</option>
           <option value="Yemen">Yemen</option>
           <option value="Yugoslavia">Yugoslavia</option>
           <option value="Zambia">Zambia</option>
           <option value="Zimbabwe">Zimbabwe</option>
         </select>
-        <input
-          type="text"
-          required
-          id="currentStateInput"
-          name="currentState"
-          placeholder="Current State *"
-        />
+      </div>
 
-        <input
-          type="text"
-          required
-          id="currentZipCodeInput"
-          name="currentZipCode"
-          placeholder="Zip Code *"
-        />
-
-        <div class="radio-group">
-          <label class="radio-group-label"> Subsctibe to Newsletter : </label>
-          <div class="radios">
-            <label class="radio-label">Yes</label>
-            <input
-              type="radio"
-              checked
-              class="radio-control"
-              name="isSubscribed"
-            />
-          </div>
-          <div class="radios">
-            <label class="radio-label">No</label>
-            <input type="radio" class="radio-control" name="isSubscribed" />
-          </div>
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="empty-msg">This can not be left.</p>
+          <p class="invalid-msg">State consists of only alphabets, right!</p>
+          <i class="sqare"></i>
         </div>
-        <button type="submit">Make me registered</button>
-      </form>
-    </div>
-  </body>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" required id="currentStateInput" name="currentState" placeholder="Current State *" pattern="[a-zA-Z]+" />
+      </div>
+
+      <div class="input-group">
+        <div class="error-msg">
+          <p class="empty-msg">Zip code must be filled up.</p>
+          <p class="invalid-msg">Invalid zip code detected.</p>
+          <i class="sqare"></i>
+        </div>
+        <i class="fa fa-exclamation-circle error-icon"></i>
+        <input type="text" required id="currentZipCodeInput" name="currentZipCode" placeholder="Zip Code *" pattern="[0-9]{5,6}" />
+      </div>
+      
+      <div class="radio-group">
+        <label class="radio-group-label"> Subsctibe to Newsletter : </label>
+        <div class="radios">
+          <label class="radio-label">Yes</label>
+          <input type="radio" checked class="radio-control" name="isSubscribed" />
+        </div>
+        <div class="radios">
+          <label class="radio-label">No</label>
+          <input type="radio" class="radio-control" name="isSubscribed" />
+        </div>
+      </div>
+      <div class="captcha-group">
+        <div class="captcha-label">Please Fill the CAPTCHA.</div>
+        <div class="captcha-image"><img src="https://dummyimage.com/100x40/E6FDEF/f0731f.gif&text=3-3" alt="CAPTCHA"></div>
+        <a class="captcha-refresh"><i class="fa fa-refresh"></i></a>
+        <input type="number"  min="0" max="9" maxlength="1" placeholder="=">
+      </div>
+      <button type="submit">Make me registered</button>
+    </form>
+  </div>
+</body>
+
 </html>
