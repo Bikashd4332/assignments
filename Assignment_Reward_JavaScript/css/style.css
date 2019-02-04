@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url("https://fonts.googleapis.com/css?family=Raleway");
 
 input[type="text"],
 [type="date"],
@@ -12,6 +12,7 @@ select,
   border: none;
   outline: none;
   opacity: 0.7;
+  font-family: "Raleway";
   transition: 300ms;
   box-sizing: border-box;
   padding-right: 35px;
@@ -97,7 +98,7 @@ select:focus,
   margin: 5px;
   font-size: 1.2em;
   font-weight: 400;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Raleway";
 }
 .radio-label {
   color: slategray;
@@ -146,15 +147,48 @@ body {
 
 .radios {
   float: right;
+  position: relative;
   margin-right: 20px;
 }
 
+.radio-label {
+  font-family: "Raleway";
+}
+
 .radio-control {
-  width: 20px;
+  width: 40px;
   height: 20px;
   position: relative;
-  top: 3px;
+  top: 5px;
+  border-radius: 20px;
+  background: #11998e;
+  box-shadow: inset 1px 0px 1px rgba(0, 0, 0, 0.4);
+  -webkit-appearance: none;
+  transition: all 200ms ease;
   outline: none;
+}
+
+.radio-control::after {
+  content: " ";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  top: 1px;
+  transition: all 200ms ease;
+  bottom: 0px;
+  right: 0px;
+}
+
+.radio-control:checked {
+  background: #38ef7d;
+}
+
+.radio-control:checked::after {
+  transform: translateX(-18px);
+  transition: all 200ms ease;
 }
 
 button {
@@ -216,22 +250,21 @@ button {
   opacity: 0;
   top: 0px;
   border-radius: 5px;
-  z-index: 1; 
-  font-family: 'Raleway';
+  z-index: 1;
+  font-family: "Raleway";
   color: rgba(255, 255, 255, 1);
   background: rgba(190, 0, 0, 1);
-  transition: .3s all ease-out;
+  transition: 0.3s all ease-out;
 }
 
-
-.error-msg  p {
-  padding : 10px;
+.error-msg p {
+  padding: 10px;
   font-size: 15px;
   text-align: center;
   vertical-align: middle;
   z-index: 1;
   margin: 0;
-  color: rgba(255, 255, 255, 1)
+  color: rgba(255, 255, 255, 1);
 }
 
 .error-msg .sqare {
@@ -253,16 +286,15 @@ button {
   display: none;
 }
 .invalid-msg {
-  display: none
+  display: none;
 }
-
 
 .captcha-group {
   display: inline-block;
   width: 50%;
   margin-top: 20px;
   padding: 30px 10px 10px;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 5px;
   position: relative;
 }
@@ -270,18 +302,17 @@ button {
 .captcha-group > input {
   width: 100%;
   padding-left: 110px;
-
 }
 
 .captcha-group > .captcha-image {
   position: absolute;
   left: 10px;
-  bottom: 13px;  
+  bottom: 13px;
   z-index: 1;
 }
 
 .captcha-group > .captcha-refresh {
-  position: absolute; 
+  position: absolute;
   display: block;
   top: 0px;
   text-decoration: none;
@@ -292,7 +323,7 @@ button {
 }
 
 .captcha-group > .captcha-label {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-size: 15px;
   position: absolute;
   top: 3px;
