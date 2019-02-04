@@ -69,7 +69,8 @@ select:focus,
   font-size: 29px;
   position: relative;
   top: 5px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-family: "Raleway";
 }
 
 #passwordInput {
@@ -85,14 +86,14 @@ select:focus,
 .radio-group {
   height: 35px;
   width: 584px;
-  background-color: rgba(255, 255, 255, 0.6);
+  /* background-color: rgba(255, 255, 255, 0.6); */
   border-radius: 5px;
   margin: 20px 0px 5px;
   padding: 5px;
 }
 
 .radio-group-label {
-  color: slategray;
+  /* color: slategray; */
   position: relative;
   top: 3px;
   margin: 5px;
@@ -100,9 +101,7 @@ select:focus,
   font-weight: 400;
   font-family: "Raleway";
 }
-.radio-label {
-  color: slategray;
-}
+
 body {
   background: -webkit-linear-gradient(to bottom, #11998e, #38ef7d);
   background: linear-gradient(to top, #11998e, #38ef8d);
@@ -328,4 +327,67 @@ button {
   position: absolute;
   top: 3px;
   left: 10px;
+}
+
+.toast-container {
+  position: fixed;
+  width: 28vw;
+  top: 0;
+  left: 0;
+  font-family: "Raleway";
+  font-size: 18px;
+}
+
+.toast-body {
+  padding: 15px;
+  width: 80%;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+  margin: auto;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 0, 0, 0.7);
+}
+
+.toast {
+  margin-top: 15px;
+}
+
+.toast-body > .toast-icon {
+  display: inline-block;
+  margin-right: 10px;
+  color: rgba(255, 0, 0, 0.7);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+}
+
+.animate-in {
+  animation: fade-in 0.3s;
+  animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+
+.animate-out {
+  animation: fade-out 0.3s;
+  animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
 }
