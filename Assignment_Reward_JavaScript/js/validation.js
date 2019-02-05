@@ -1,5 +1,5 @@
-const toastService = new ToastMaker();
-toastService.duration = 3000;
+const toastService = new ToastMaker(3000);
+
 
 window.onload = () => {
   const formElements = document.querySelectorAll(".input-group  input");
@@ -10,8 +10,6 @@ window.onload = () => {
   toastService.setToastParentElement(
     document.querySelector(".toast-container")
   );
-
-  toastService.count = 0;
 
   formElements.forEach(formElement => {
     formElement.addEventListener("focus", showErrorOnFocus, false);
@@ -31,7 +29,6 @@ window.onload = () => {
   formElement.onsubmit = validation;
 
   captchaRefresh.addEventListener("click", captchaRefreshOnClick, false);
-  toastService.show();
 };
 
 function captchaRefreshOnClick(event) {
@@ -208,57 +205,62 @@ function refreshCaptchaWithNewRandomValues(captchaElement) {
     getRandomOperands();
 }
 
-function ToastMaker() {
-  this.setToastParentElement = toastElement => {
-    this.toastParentElement = toastElement;
-  };
-  this.duration = 3000;
-  this.toastParentElement = null;
-  this.count = 0;
+function ToastMaker(duration, toastParentElement) {
 
-  this.show = (content = "Toast message goes here.") => {
-    const toastBodyDiv = document.createElement("div");
-    const toastDiv = document.createElement("div");
-    const toastIconDiv = document.createElement("div");
-    const toastIcon = document.createElement("i");
-    const contentSpan = document.createElement("span");
+  if (duration != undefined) {
+    this.__proto__.duration = duration;
+  }
 
-    console.log(
-      "this.toastParentElement :" +
-        this.toastParentElement +
-        ", this.count: " +
-        this.count
-    );
-    toastDiv.classList.add("toast");
-    toastBodyDiv.classList.add("toast-body");
-    toastIcon.classList.add("fa", "fa-exclamation-circle");
-    toastIconDiv.classList.add("toast-icon");
-    contentSpan.classList.add("toast-message");
+  if (toastParentElement != undefined) {
+    this.__proto__.toastParentElement = toastParentElement;
+  }
 
-    toastBodyDiv.appendChild(toastIconDiv);
-    contentSpan.innerText = content;
-    toastBodyDiv.appendChild(contentSpan);
-    toastIconDiv.appendChild(toastIcon);
-    this.count++;
+}
 
-    toastDiv.appendChild(toastBodyDiv);
+ToastMaker.prototype.duration = 3000;
+ToastMaker.prototype.toastParentElement = null;
+ToastMaker.prototype.count = 0;
+ToastMaker.prototype.setToastParentElement = function (toastParentElement) {
+  this.__proto__.toastParentElement = toastParentElement;
+}
 
-    toastDiv.style.top = `${this.count * 51}px`;
-    toastDiv.classList.add("animate-in");
 
-    this.toastParentElement.appendChild(toastDiv);
+ToastMaker.prototype.show = function (content = "Toast message goes here.") {
+  const toastBodyDiv = document.createElement("div");
+  const toastDiv = document.createElement("div");
+  const toastIconDiv = document.createElement("div");
+  const toastIcon = document.createElement("i");
+  const contentSpan = document.createElement("span");
 
+  toastDiv.classList.add("toast");
+  toastBodyDiv.classList.add("toast-body");
+  toastIcon.classList.add("fa", "fa-exclamation-circle");
+  toastIconDiv.classList.add("toast-icon");
+  contentSpan.classList.add("toast-message");
+
+  toastBodyDiv.appendChild(toastIconDiv);
+  contentSpan.innerText = content;
+  toastBodyDiv.appendChild(contentSpan);
+  toastIconDiv.appendChild(toastIcon);
+  this.__proto__.count++;
+
+  toastDiv.appendChild(toastBodyDiv);
+
+  toastDiv.style.top = `${this.__proto__.count * 51}px`;
+  toastDiv.classList.add("animate-in");
+
+  this.__proto__.toastParentElement.appendChild(toastDiv);
+
+  setTimeout(() => {
+    toastDiv.classList.add("animate-out");
     setTimeout(() => {
-      toastDiv.classList.add("animate-out");
-      setTimeout(() => {
-        this.toastParentElement.removeChild(toastDiv);
-        this.count--;
+      this.__proto__.toastParentElement.removeChild(toastDiv);
+      this.__proto__.count--;
 
-        const currentShowingToast = document.querySelectorAll(".toast");
-        currentShowingToast.forEach(toastDiv => {
-          toastDiv.style.top = `${parseInt(toastDiv.style.top, 10) - 51}px`;
-        });
-      }, 300);
-    }, this.duration);
-  };
+      const currentShowingToast = document.querySelectorAll(".toast");
+      currentShowingToast.forEach(toastDiv => {
+        toastDiv.style.top = `${parseInt(toastDiv.style.top, 10) - 51}px`;
+      });
+    }, 300);
+  }, this.__proto__.duration);
 }
