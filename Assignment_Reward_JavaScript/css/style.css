@@ -159,6 +159,7 @@ body {
   height: 20px;
   position: relative;
   top: 5px;
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
   border-radius: 20px;
   background: #11998e;
   box-shadow: inset 1px 0px 1px rgba(0, 0, 0, 0.4);
@@ -182,12 +183,14 @@ body {
 }
 
 .radio-control:checked {
-  background: #38ef7d;
+  background: #D2F5E7;
 }
 
+
 .radio-control:checked::after {
-  transform: translateX(-18px);
+  transform: translateX(-20px);
   transition: all 200ms ease;
+  background-color: #38ef7d;
 }
 
 button {
@@ -265,7 +268,6 @@ button {
   margin: 0;
   color: rgba(255, 255, 255, 1);
 }
-
 .error-msg .sqare {
   position: absolute;
   width: 15px;
