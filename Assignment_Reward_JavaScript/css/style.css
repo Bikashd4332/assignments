@@ -106,6 +106,7 @@ body {
   background: -webkit-linear-gradient(to bottom, #11998e, #38ef7d);
   background: linear-gradient(to top, #11998e, #38ef8d);
   font-family: "Balo Thambi", cursive;
+  margin: 0px;
   font-weight: 500;
   font-size: 17px;
 }
@@ -183,9 +184,8 @@ body {
 }
 
 .radio-control:checked {
-  background: #D2F5E7;
+  background: #d2f5e7;
 }
-
 
 .radio-control:checked::after {
   transform: translateX(-20px);
@@ -392,4 +392,60 @@ button {
 .animate-out {
   animation: fade-out 0.3s;
   animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+}
+
+.popup-overlay {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  top: 0px;
+}
+
+.spinner-widget {
+  width: 150px;
+  height: 150px;
+  background-color: #f3f3f3;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.spinner-widget > .circle {
+  width: 115px;
+  height: 115px;
+  position: absolute;
+  border-radius: 50%;
+  top: 12%;
+  left: 12%;
+  z-index: 2;
+  background-color: #fff;
+}
+
+.spinner {
+  width: 80px;
+  position: absolute;
+  height: 80px;
+  transform: rotate(45deg);
+  background-color: skyblue;
+  left: -3%;
+  top: -1%;
+  transform-origin: 100% 100%;
+  animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(45deg);
+  }
+
+  to {
+    transform: rotate(405deg);
+  }
 }

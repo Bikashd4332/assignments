@@ -1,5 +1,6 @@
+// Making all the services ready that don't depend on the DOM.
 const toastService = new ToastMaker(3000);
-
+const spinnerService = new Spinner();
 
 window.onload = () => {
   const formElements = document.querySelectorAll(".input-group  input");
@@ -9,6 +10,10 @@ window.onload = () => {
   );
   toastService.setToastParentElement(
     document.querySelector(".toast-container")
+  );
+
+  spinnerService.setSpinnerWidgetContainer(
+    document.querySelector(".popup-content")
   );
 
   formElements.forEach(formElement => {
@@ -153,7 +158,22 @@ function validation() {
     isAllValid = false;
   }
 
-  return isAllValid;
+  if (isAllValid) {
+    document.querySelector("form").reset();
+    spinnerService.toggleSpinner();
+    const mimickingServerProcess = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(true);
+      }, 3000);
+    });
+    mimickingServerProcess.then(status => {
+      if (status) {
+        spinnerService.toggleSpinner();
+      }
+    });
+  }
+
+  return false;
 }
 
 function isValid(formElement) {
@@ -205,8 +225,8 @@ function refreshCaptchaWithNewRandomValues(captchaElement) {
     getRandomOperands();
 }
 
+// A Toast Object for giving informations to user.
 function ToastMaker(duration, toastParentElement) {
-
   if (duration != undefined) {
     this.__proto__.duration = duration;
   }
@@ -214,18 +234,16 @@ function ToastMaker(duration, toastParentElement) {
   if (toastParentElement != undefined) {
     this.__proto__.toastParentElement = toastParentElement;
   }
-
 }
 
 ToastMaker.prototype.duration = 3000;
 ToastMaker.prototype.toastParentElement = null;
 ToastMaker.prototype.count = 0;
-ToastMaker.prototype.setToastParentElement = function (toastParentElement) {
+ToastMaker.prototype.setToastParentElement = function(toastParentElement) {
   this.__proto__.toastParentElement = toastParentElement;
-}
+};
 
-
-ToastMaker.prototype.show = function (content = "Toast message goes here.") {
+ToastMaker.prototype.show = function(content = "Toast message goes here.") {
   const toastBodyDiv = document.createElement("div");
   const toastDiv = document.createElement("div");
   const toastIconDiv = document.createElement("div");
@@ -263,4 +281,83 @@ ToastMaker.prototype.show = function (content = "Toast message goes here.") {
       });
     }, 300);
   }, this.__proto__.duration);
+};
+
+// Spinner Object for Spinner manipulation on screen.
+function Spinner() {}
+
+Spinner.prototype.spinnerWidgetContainer = null;
+Spinner.prototype.setSpinnerWidgetContainer = function(spinnerWidgetContainer) {
+  this.__proto__.spinnerWidgetContainer = spinnerWidgetContainer;
+};
+Spinner.prototype.isShown = false;
+Spinner.prototype.toggleSpinner = function() {
+  if (this.__proto__.isShown === false) {
+    const popupOverlay = document.createElement("div");
+    const popupContent = document.createElement("div");
+    const spinnerWidget = document.createElement("div");
+    const spinnerCircle = document.createElement("i");
+    const spinnerSpin = document.createElement("div");
+
+    // Adding all the classes to the corresponding elements.
+    spinnerWidget.classList.add("spinner-widget");
+    spinnerCircle.classList.add("circle");
+    spinnerSpin.classList.add("spinner");
+    spinnerWidget.classList.add("animate-in");
+    popupOverlay.classList.add("popup-overlay");
+    popupContent.classList.add("popup-content");
+
+    // Adding the elements to its right DOM place.
+    spinnerWidget.appendChild(spinnerCircle);
+    spinnerWidget.appendChild(spinnerSpin);
+    popupContent.appendChild(spinnerWidget);
+    popupOverlay.appendChild(popupContent);
+    document.body.appendChild(popupOverlay);
+
+    this.__proto__.isShown = true;
+  } else {
+    const spinnerWidget = document.querySelector(".spinner-widget");
+    const popupOverlay = document.querySelector(".popup-overlay");
+    const popupContent = document.querySelector(".popup-content");
+
+    spinnerWidget.classList.add("animate-out");
+
+    setTimeout(() => {
+      popupContent.removeChild(spinnerWidget);
+      document.body.removeChild(popupOverlay);
+    }, 300);
+    this.__proto__.isShown = false;
+  }
+};
+
+function sendFormDataToProcess(formElement) {
+  const registrationFormData = new FormData(formElement);
+  const sendingDataToProcessPromise = new Promise((resolve, reject) => {
+    const myXmlHttpRequest = new XMLHttpRequest();
+    myXmlHttpRequest.open("POST", "https://postman-echo.com/get", true);
+    myXmlHttpRequest.onreadystatechange = () => {
+      if (myXmlHttpRequest.readyState === 4) {
+        if (myXmlHttpRequest.status === 200) {
+          const jsonResponseData = JSON.parse(myXmlHttpRequest.response);
+          resolve(jsonResponseData);
+        }
+
+        if (myXmlHttpRequest.status === 404) {
+          reject("Resource isn't available.");
+        }
+      }
+    };
+    Spinner.showSpinner();
+    myXmlHttpRequest.send(registrationFormData);
+  });
+  sendingDataToProcessPromise.then(
+    jsonResponseData => {
+      Spinner.closeSpinner();
+      Modal.showSuccessPopup(jsonResponseData);
+    },
+    errorReason => {
+      Spinner.closeSpinner();
+      Modal.showErrorPopup(errorReason);
+    }
+  );
 }
