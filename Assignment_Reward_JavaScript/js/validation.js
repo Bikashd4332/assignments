@@ -159,18 +159,9 @@ function validation() {
   }
 
   if (isAllValid) {
-    document.querySelector("form").reset();
-    spinnerService.toggleSpinner();
-    const mimickingServerProcess = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(true);
-      }, 3000);
-    });
-    mimickingServerProcess.then(status => {
-      if (status) {
-        spinnerService.toggleSpinner();
-      }
-    });
+    const formElement = document.querySelector("form");
+    sendFormDataToProcess(formElement);
+    formElement.reset();
   }
 
   return false;
@@ -334,7 +325,7 @@ function sendFormDataToProcess(formElement) {
   const registrationFormData = new FormData(formElement);
   const sendingDataToProcessPromise = new Promise((resolve, reject) => {
     const myXmlHttpRequest = new XMLHttpRequest();
-    myXmlHttpRequest.open("POST", "https://postman-echo.com/get", true);
+    myXmlHttpRequest.open("POST", "php/saveFormData.php", true);
     myXmlHttpRequest.onreadystatechange = () => {
       if (myXmlHttpRequest.readyState === 4) {
         if (myXmlHttpRequest.status === 200) {
@@ -347,17 +338,17 @@ function sendFormDataToProcess(formElement) {
         }
       }
     };
-    Spinner.showSpinner();
+    spinnerService.toggleSpinner();
     myXmlHttpRequest.send(registrationFormData);
   });
   sendingDataToProcessPromise.then(
     jsonResponseData => {
-      Spinner.closeSpinner();
-      Modal.showSuccessPopup(jsonResponseData);
+      spinnerService.toggleSpinner();
+      popupService.showPopup("Registration Successfull", "Thanks for signing up, your details have been successfully stored." () => console.log("Pressed OK"), () => console.log("Pressed Close"));
     },
     errorReason => {
-      Spinner.closeSpinner();
-      Modal.showErrorPopup(errorReason);
+      spinnerService.toggleSpinner();
+      popupService.showPopup("Registration Unsuccessfull", "We could not sign you up because the server sent some errorneous response, "+errorReason, () => console.log("Pressed OK"), () => console.log("Pressed Close"));   
     }
   );
 }
