@@ -1,0 +1,99 @@
+.input-group {
+  display: inline-block;
+  position: relative;
+}
+
+.form-control {
+  padding: 13px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  opacity: 0.7;
+  font-family: "Raleway";
+  transition: 300ms;
+  box-sizing: border-box;
+  padding-right: 35px;
+}
+
+
+.form-control:focus {
+  box-shadow: 1px 10px 25px rgba(0, 0, 0, 0.3);
+  transition: box-shadow ease-in-out 200ms;
+}
+
+.radios {
+  float: right;
+  position: relative;
+  margin-right: 20px;
+}
+
+.radio-label {
+  font-family: "Raleway";
+}
+
+.radio-control {
+  width: 40px;
+  height: 20px;
+  position: relative;
+  top: 5px;
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
+  border-radius: 20px;
+  background: #11998e;
+  box-shadow: inset 1px 0px 1px rgba(0, 0, 0, 0.4);
+  -webkit-appearance: none;
+  transition: all 200ms ease;
+  outline: none;
+}
+
+.radio-control::after {
+  content: " ";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  top: 1px;
+  transition: all 200ms ease;
+  bottom: 0px;
+  right: 0px;
+}
+
+.radio-control:checked {
+  background: #d2f5e7;
+}
+
+.radio-control:checked::after {
+  transform: translateX(-20px);
+  transition: all 200ms ease;
+  background-color: #38ef7d;
+}
+
+
+.radio-group {
+  height: 35px;
+  width: 584px;
+  border-radius: 5px;
+  margin: 20px 0px 5px;
+  padding: 5px;
+}
+
+.radio-group-label {
+  position: relative;
+  top: 3px;
+  margin: 5px;
+  font-size: 1.2em;
+  font-weight: 400;
+  font-family: "Raleway";
+}
+
+.form-icon {
+  width: 15px;
+  height: 150px;
+  font-size: 150px;
+  position: relative;
+  left: 32%;
+  margin: 40px;
+  color: rgba(0, 0, 0, 0.4);
+}

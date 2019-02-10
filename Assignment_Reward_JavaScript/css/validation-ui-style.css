@@ -1,0 +1,57 @@
+.input-group .error-icon {
+  position: absolute;
+  font-size: 25px;
+  bottom: 50%;
+  right: 10px;
+  color: rgba(255, 0, 0, 0.5);
+  z-index: 1;
+  margin-bottom: -20px;
+  display: none;
+}
+
+.error-msg {
+  position: absolute;
+  width: auto;
+  height: auto;
+  opacity: 0;
+  top: 0px;
+  border-radius: 5px;
+  z-index: 1;
+  font-family: "Raleway";
+  color: rgba(255, 255, 255, 1);
+  background: rgba(190, 0, 0, 1);
+  transition: 0.3s all ease-out;
+}
+
+.error-msg p {
+  padding: 10px;
+  font-size: 15px;
+  text-align: center;
+  vertical-align: middle;
+  z-index: 1;
+  margin: 0;
+  color: rgba(255, 255, 255, 1);
+}
+
+.error-msg .sqare {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  right: 50%;
+  top: 30px;
+  z-index: 1;
+  transform: translateX(7px) rotate(45deg);
+  background: rgba(190, 0, 0, 1);
+}
+
+.invalid {
+  color: rgba(255, 0, 0, 0.8);
+}
+
+.empty-msg {
+  display: none;
+}
+
+.invalid-msg {
+  display: none;
+}

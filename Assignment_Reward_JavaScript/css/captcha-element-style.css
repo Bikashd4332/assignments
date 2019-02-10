@@ -1,0 +1,40 @@
+.captcha-group {
+  display: inline-block;
+  width: 50%;
+  margin-top: 20px;
+  padding: 30px 10px 10px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  position: relative;
+}
+
+.captcha-group>input {
+  width: 100%;
+  padding-left: 110px;
+}
+
+.captcha-group>.captcha-image {
+  position: absolute;
+  left: 10px;
+  bottom: 13px;
+  z-index: 1;
+}
+
+.captcha-group>.captcha-refresh {
+  position: absolute;
+  display: block;
+  top: 0px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  right: 5px;
+  font-size: 15px;
+}
+
+.captcha-group>.captcha-label {
+  font-family: "Raleway";
+  font-size: 15px;
+  position: absolute;
+  top: 3px;
+  left: 10px;
+}

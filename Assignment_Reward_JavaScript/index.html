@@ -17,7 +17,7 @@
 
     <script src="./js/validation.js"></script>
 
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/global-style.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -38,6 +38,7 @@
           <input
             type="text"
             id="firstNameInput"
+            class="form-control"
             required
             placeholder="First Name *"
             name="firstName"
@@ -56,6 +57,7 @@
             type="text"
             id="lastNameInput"
             required
+            class="form-control"
             name="lastName"
             placeholder="Last Name *"
             pattern="[a-zA-Z]+"
@@ -72,6 +74,7 @@
           <input
             type="text"
             required
+            class="form-control"
             name="emailId"
             id="emailIdInput"
             placeholder="Email *"
@@ -91,6 +94,7 @@
           <input
             type="text"
             required
+            class = "form-control"
             name="emailDomain"
             id="emailDomainInput"
             placeholder="Domain *"
@@ -108,6 +112,7 @@
             type="password"
             required
             name="password"
+            class="form-control"
             id="passwordInput"
             placeholder="Password *"
           />
@@ -123,6 +128,7 @@
           <input
             type="password"
             required
+            class="form-control"
             id="passwordConfirmationInput"
             name="passwordConfirmation"
             placeholder="Re-enter Password *"
@@ -171,6 +177,7 @@
           <input
             type="text"
             required
+            class="form-control"
             id="primaryCellPhoneInput"
             name="primaryCellPhone"
             placeholder="Primary Cell Phone *"
@@ -188,6 +195,7 @@
             type="text"
             id="secondaryCellPhoneInput"
             name="secondaryPhoneNumber"
+            class="form-control"
             placeholder="Alternative Cell Phone"
             pattern="[0-9]{10}"
           />
@@ -202,6 +210,7 @@
           <input
             type="text"
             required
+            class="form-control"
             id="currentAddressInput"
             name="currentAddress"
             placeholder="Current Address *"
@@ -215,7 +224,7 @@
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
 
-          <select required name="currentCountry" id="currentCountrySelect">
+          <select required class="form-control" name="currentCountry" id="currentCountrySelect">
             <option value="0">Select Country</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Albania">Albania</option>
@@ -501,6 +510,7 @@
           <input
             type="text"
             required
+            class="form-control"
             id="currentStateInput"
             name="currentState"
             placeholder="Current State *"
@@ -518,6 +528,7 @@
           <input
             type="text"
             required
+            class="form-control"
             id="currentZipCodeInput"
             name="currentZipCode"
             placeholder="Zip Code *"
@@ -533,6 +544,7 @@
           <i class="fa fa-exclamation-circle error-icon"></i>
           <input
             type="text"
+            class="form-control"
             id="permanentAddressInput"
             name="permanentAddress"
             placeholder="Permanent Address"
@@ -543,7 +555,7 @@
             <p class="empty-msg">Please select your permanent country.</p>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
-          <select name="permanentCountry" id="countrySelect">
+          <select name="permanentCountry" id="countrySelect" class="form-control">
             <option value="0" selected>Select Country</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Albania">Albania</option>
@@ -826,6 +838,7 @@
           <i class="fa fa-exclamation-circle error-icon"></i>
           <input
             type="text"
+            class="form-control"
             id="permanentStateInput"
             name="permanentState"
             placeholder="Permanent State"
@@ -842,6 +855,7 @@
           <input
             type="text"
             id="permanentZipCodeInput"
+            class="form-control"
             name="permanentZipCode"
             placeholder="Zip Code"
             pattern="[0-9]{5,6}"
@@ -873,7 +887,7 @@
             />
           </div>
           <div class="captcha-refresh"><i class="fa fa-refresh"></i></div>
-          <input type="number" min="0" max="9" maxlength="1" placeholder="=" />
+          <input type="number" min="0" max="9" class="form-control" maxlength="1" placeholder="=" />
         </div>
         <button type="submit">Make me registered</button>
       </form>

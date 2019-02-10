@@ -1,10 +1,12 @@
 // Making all the services ready that don't depend on the DOM.
 const toastService = new ToastMaker(3000);
 const spinnerService = new Spinner();
+const popupService = new PopupWindow();
 
 window.onload = () => {
   const formElements = document.querySelectorAll(".input-group  input");
   const selectElements = document.querySelectorAll(".input-group  select");
+  const captchaElement = document.querySelector(".captcha-group > input");
   const captchaRefresh = document.querySelector(
     ".captcha-group .captcha-refresh"
   );
@@ -34,6 +36,7 @@ window.onload = () => {
   formElement.onsubmit = validation;
 
   captchaRefresh.addEventListener("click", captchaRefreshOnClick, false);
+  refreshCaptchaWithNewRandomValues(captchaElement);
 };
 
 function captchaRefreshOnClick(event) {
@@ -321,6 +324,94 @@ Spinner.prototype.toggleSpinner = function() {
   }
 };
 
+
+// Making PopupWindow object for showing messages to the user.
+function PopupWindow() {}
+
+PopupWindow.prototype.showPopup = function (
+  messageHeader,
+  messageBody,
+  onPressingOk,
+  onPressingClose
+) {
+  let popupOverlay = document.createElement("div");
+  let popupContent = document.createElement("div");
+  let popup = document.createElement("div");
+  let popupHeader = document.createElement("div");
+  let popupBody = document.createElement("div");
+  let popupButton1 = document.createElement("a");
+  let popupButton2 = document.createElement("a");
+
+  // Adding all the classes to the corresponding elements.
+  popupOverlay.classList.add("popup-overlay");
+  popupContent.classList.add("popup-content");
+  popup.classList.add("popup");
+  popupHeader.classList.add("popup-header");
+  popupBody.classList.add("popup-body");
+  popupButton1.classList.add("popup-button");
+  popupButton2.classList.add("popup-button");
+
+  //Adding Content inside the respective elements.
+  const h3Header = document.createElement("h3");
+  h3Header.innerText = messageHeader;
+  popupHeader.appendChild(h3Header);
+
+  const pBody = document.createElement("p");
+  pBody.innerText = messageBody;
+  popupBody.appendChild(pBody);
+
+  popupButton1.innerText = "Ok";
+  popupButton1.href = "#";
+
+  popupButton1.addEventListener(
+    "click",
+    () => {
+      popup.classList.add("animate-out");
+      setTimeout(() => {
+        popupContent.removeChild(popup);
+        document.body.removeChild(popupOverlay);
+        popup = null;
+        popupOverlay = null;
+        if (typeof onPressingOk === "function") {
+          onPressingOk();
+        }
+      }, 300);
+    },
+    false
+  );
+
+  popupButton2.addEventListener(
+    "click",
+    () => {
+      popup.classList.add("animate-out");
+      setTimeout(() => {
+        popupContent.removeChild(popup);
+        document.body.removeChild(popupOverlay);
+        popup = null;
+        popupOverlay = null;
+        if (typeof onPressingClose === "function") {
+          onPressingClose();
+        }
+      }, 300);
+    },
+    false
+  );
+
+  popupButton2.innerText = "Close";
+  popupButton2.href = "#";
+
+  // Adding the elements to its right DOM place.
+  popup.appendChild(popupHeader);
+  popup.appendChild(popupBody);
+  popup.appendChild(popupButton1);
+  popup.appendChild(popupButton2);
+  popupContent.appendChild(popup);
+  popupOverlay.appendChild(popupContent);
+
+  document.body.appendChild(popupOverlay);
+  popup.classList.add("animate-in");
+};
+
 function sendFormDataToProcess(formElement) {
   const registrationFormData = new FormData(formElement);
   const sendingDataToProcessPromise = new Promise((resolve, reject) => {
@@ -344,7 +435,7 @@ function sendFormDataToProcess(formElement) {
   sendingDataToProcessPromise.then(
     jsonResponseData => {
       spinnerService.toggleSpinner();
-      popupService.showPopup("Registration Successfull", "Thanks for signing up, your details have been successfully stored." () => console.log("Pressed OK"), () => console.log("Pressed Close"));
+      popupService.showPopup("Registration Successfull", "Thanks for signing up, your details have been successfully stored." ,() => console.log("Pressed OK"), () => console.log("Pressed Close"));
     },
     errorReason => {
       spinnerService.toggleSpinner();
