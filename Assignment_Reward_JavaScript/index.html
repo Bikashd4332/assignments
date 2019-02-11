@@ -101,13 +101,15 @@
             pattern="[a-zA-Z]*(\.co)?\.([a-z]{2,3})"
           />
         </div>
-        <div class="input-group">
+        <div class="input-group password-show-hide">
           <div class="error-msg">
             <p class="empty-msg">Password Field Must Be Filled Up.</p>
             <p class="invalid-msg">The password is too short.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
+          <a href="javascript:void(0)" class="fa fa-eye password-show"></a>
+          <a href="javascript:void(0)" class="fa fa-eye-slash password-hide"></a>
           <input
             type="password"
             required
@@ -118,13 +120,15 @@
           />
         </div>
 
-        <div class="input-group">
+        <div class="input-group password-show-hide separate-error-eye">
           <div class="error-msg" id="passwordConfirmationInputErrorMsg">
             <p class="empty-msg">Confirm by writing the same password again.</p>
             <p class="invalid-msg">Doesn't match with the password.</p>
             <i class="sqare"></i>
           </div>
-          <i class="fa fa-exclamation-circle error-icon"></i>
+            <i class="fa fa-exclamation-circle error-icon"></i> 
+            <a href="javascript:void(0)" class="fa fa-eye password-show"></a>
+            <a href="javascript:void(0)" class="fa fa-eye-slash password-hide"></a>
           <input
             type="password"
             required

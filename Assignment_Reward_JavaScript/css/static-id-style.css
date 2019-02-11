@@ -36,6 +36,11 @@
   margin: 20px 0px 5px;
 }
 
+#passwordConfirmationInput {
+  width: 594px;
+  margin: 20px 0px 5px;
+}
+
 #primaryCellPhoneInput {
   width: 292px;
   margin: 20px 0px 5px 0px;

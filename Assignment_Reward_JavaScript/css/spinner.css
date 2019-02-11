@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-.spinner-widget>.circle {
+.spinner-widget > .circle {
   width: 115px;
   height: 115px;
   position: absolute;

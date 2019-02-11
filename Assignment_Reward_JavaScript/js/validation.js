@@ -10,6 +10,14 @@ window.onload = () => {
   const captchaRefresh = document.querySelector(
     ".captcha-group .captcha-refresh"
   );
+  const formElement = document.querySelector("form");
+  const passwordElements = document.querySelectorAll(".password-show-hide");
+  const passwordShowHideTriggers = document.querySelectorAll(
+    ".password-show-hide > .password-show, .password-hide"
+  );
+
+  console.log(passwordShowHideTriggers);
+
   toastService.setToastParentElement(
     document.querySelector(".toast-container")
   );
@@ -32,15 +40,65 @@ window.onload = () => {
     );
   });
 
-  const formElement = document.querySelector("form");
   formElement.onsubmit = validation;
-
+  passwordElements.forEach(passwordElement =>
+    passwordElement.addEventListener("input", passwordShowHide, false)
+  );
+  passwordShowHideTriggers.forEach(passwordShowHideTrigger =>
+    passwordShowHideTrigger.addEventListener(
+      "click",
+      revealPasswordToggle,
+      false
+    )
+  );
   captchaRefresh.addEventListener("click", captchaRefreshOnClick, false);
   refreshCaptchaWithNewRandomValues(captchaElement);
 };
 
 function captchaRefreshOnClick(event) {
   refreshCaptchaWithNewRandomValues(event.target.parentElement);
+}
+
+function passwordShowHide(event) {
+  const parentPasswordShowHide = event.target.parentElement;
+  const showPasswordIcon = parentPasswordShowHide.querySelector(
+    ".password-show"
+  );
+  const hidePasswordIcon = parentPasswordShowHide.querySelector(
+    ".password-hide"
+  );
+  if (event.target.type === "password") {
+    showPasswordIcon.style.display = "block";
+    hidePasswordIcon.style.display = "none";
+    if (event.target.value === "") {
+      showPasswordIcon.style.display = "none";
+      hidePasswordIcon.style.display = "none";
+    }
+  } else {
+    showPasswordIcon.style.display = "none";
+    hidePasswordIcon.style.display = "block";
+  }
+}
+
+function revealPasswordToggle(event) {
+  const parentPasswordShowHide = event.target.parentElement;
+  const passwordElement = parentPasswordShowHide.querySelector(".form-control");
+  const showPasswordIcon = parentPasswordShowHide.querySelector(
+    "a.password-show"
+  );
+  const hidePasswordIcon = parentPasswordShowHide.querySelector(
+    "a.password-hide"
+  );
+
+  if (event.target === showPasswordIcon) {
+    showPasswordIcon.style.display = "none";
+    hidePasswordIcon.style.display = "block";
+    passwordElement.type = "text";
+  } else {
+    showPasswordIcon.style.display = "block";
+    hidePasswordIcon.style.display = "none";
+    passwordElement.type = "password";
+  }
 }
 
 function showErrorOnFocus(event) {
@@ -324,11 +382,10 @@ Spinner.prototype.toggleSpinner = function() {
   }
 };
 
-
 // Making PopupWindow object for showing messages to the user.
 function PopupWindow() {}
 
-PopupWindow.prototype.showPopup = function (
+PopupWindow.prototype.showPopup = function(
   messageHeader,
   messageBody,
   onPressingOk,
@@ -435,11 +492,22 @@ function sendFormDataToProcess(formElement) {
   sendingDataToProcessPromise.then(
     jsonResponseData => {
       spinnerService.toggleSpinner();
-      popupService.showPopup("Registration Successfull", "Thanks for signing up, your details have been successfully stored." ,() => console.log("Pressed OK"), () => console.log("Pressed Close"));
+      popupService.showPopup(
+        "Registration Successfull",
+        "Thanks for signing up, your details have been successfully stored.",
+        () => console.log("Pressed OK"),
+        () => console.log("Pressed Close")
+      );
     },
     errorReason => {
       spinnerService.toggleSpinner();
-      popupService.showPopup("Registration Unsuccessfull", "We could not sign you up because the server sent some errorneous response, "+errorReason, () => console.log("Pressed OK"), () => console.log("Pressed Close"));   
+      popupService.showPopup(
+        "Registration Unsuccessfull",
+        "We could not sign you up because the server sent some errorneous response, " +
+          errorReason,
+        () => console.log("Pressed OK"),
+        () => console.log("Pressed Close")
+      );
     }
   );
 }

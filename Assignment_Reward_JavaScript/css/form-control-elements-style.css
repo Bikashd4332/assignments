@@ -16,7 +16,6 @@
   padding-right: 35px;
 }
 
-
 .form-control:focus {
   box-shadow: 1px 10px 25px rgba(0, 0, 0, 0.3);
   transition: box-shadow ease-in-out 200ms;
@@ -37,7 +36,6 @@
   height: 20px;
   position: relative;
   top: 5px;
-  /* border: 1px solid rgba(255, 255, 255, 0.3); */
   border-radius: 20px;
   background: #11998e;
   box-shadow: inset 1px 0px 1px rgba(0, 0, 0, 0.4);
@@ -49,27 +47,25 @@
 .radio-control::after {
   content: " ";
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   background: #ffffff;
   box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.3);
   border-radius: 50%;
-  top: 1px;
-  transition: all 200ms ease;
-  bottom: 0px;
+  top: 0px;
   right: 0px;
+  bottom: 0px;
+  transition: all 200ms ease;
 }
 
 .radio-control:checked {
-  background: #d2f5e7;
+  background: #38ef7d;
 }
 
 .radio-control:checked::after {
   transform: translateX(-20px);
   transition: all 200ms ease;
-  background-color: #38ef7d;
 }
-
 
 .radio-group {
   height: 35px;
@@ -96,4 +92,27 @@
   left: 32%;
   margin: 40px;
   color: rgba(0, 0, 0, 0.4);
+}
+
+.password-show-hide .password-show {
+  position: absolute;
+  right: 16px;
+  z-index: 1;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.4);
+  height: 35px;
+  font-size: 35px;
+  top: 39%;
+  display: none;
+}
+
+.password-show-hide .password-hide {
+  position: absolute;
+  right: 16px;
+  z-index: 1;
+  display: none;
+  color: rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  font-size: 35px;
+  top: 39%;
 }
