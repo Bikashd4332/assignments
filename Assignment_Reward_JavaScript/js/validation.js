@@ -16,8 +16,6 @@ window.onload = () => {
     ".password-show-hide > .password-show, .password-hide"
   );
 
-  console.log(passwordShowHideTriggers);
-
   toastService.setToastParentElement(
     document.querySelector(".toast-container")
   );
@@ -261,8 +259,8 @@ function refreshCaptchaWithNewRandomValues(captchaElement) {
   let captchaURL = "https://dummyimage.com/100x40/E1F3F1/f0731f.gif&text=";
 
   var getRandomOperator = () => {
-    const operators = ["-", "*"];
-    return operators[Math.floor(Math.random(1, 9) * 2)];
+    const operators = ["-", "*", "/"];
+    return operators[Math.floor(Math.random(1, 9) * 3)];
   };
 
   var getRandomOperands = () => {
@@ -270,11 +268,26 @@ function refreshCaptchaWithNewRandomValues(captchaElement) {
     return numbers[Math.floor(Math.random(1, 9) * 9)];
   };
 
+  let randomOperator = getRandomOperator();
+  let firstRandomOperand, secondRandomOperand;
+
+  if (randomOperator === "/") {
+    do {
+      firstRandomOperand = getRandomOperands();
+      secondRandomOperand = getRandomOperands();
+    } while (firstRandomOperand % secondRandomOperand != 0);
+  } else if (randomOperator === "-") {
+    do {
+      firstRandomOperand = getRandomOperands();
+      secondRandomOperand = getRandomOperands();
+    } while (firstRandomOperand < secondRandomOperand);
+  } else {
+    firstRandomOperand = getRandomOperands();
+    secondRandomOperand = getRandomOperands();
+  }
+
   captchaImg.src =
-    captchaURL +
-    getRandomOperands() +
-    getRandomOperator() +
-    getRandomOperands();
+    captchaURL + firstRandomOperand + randomOperator + secondRandomOperand;
 }
 
 // A Toast Object for giving informations to user.
