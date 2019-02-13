@@ -170,7 +170,7 @@ function validation() {
   const formElements = document.querySelectorAll(".input-group  input");
   const selectElements = document.querySelectorAll(".input-group select");
   const passwordElements = document.querySelectorAll(
-    ".input-group input[type='password']"
+    ".password-show-hide > input"
   );
   const captchaElements = document.querySelectorAll(".captcha-group input");
 
@@ -193,7 +193,7 @@ function validation() {
 
   selectElements.forEach(selectElement => {
     const parentInputGroup = selectElement.parentElement;
-    if (selectElement.selectedIndex == 0 && selectElement.requrieds) {
+    if (selectElement.selectedIndex === 0 && selectElement.requrieds) {
       const errorIcon = parentInputGroup.querySelector(".error-icon");
       errorIcon.style.display = "block";
       selectElement.classList.add("invalid");
@@ -213,6 +213,7 @@ function validation() {
     const parentInputGroup = passwordElements[1].parentElement;
     const errorIcon = parentInputGroup.querySelector(".error-icon");
     errorIcon.style.display = "block";
+    errorIcon.style.right = "55px";
     passwordElements[1].classList.add("invalid");
     isAllValid = false;
   }
@@ -237,6 +238,20 @@ function isPasswordMatched(passwordElements) {
   return passwordElements[0].value === passwordElements[1].value;
 }
 
+function myEval(numString) {
+  const firstOperand = numString[0];
+  const secondOperand = numString[2];
+  switch (numString[1]) {
+    case '-':
+      return firstOperand - secondOperand;
+    case '*':
+      return firstOperand * secondOperand;
+    case '/':
+      return firstOperand / secondOperand;
+  }  
+}
+
+
 function isCaptchaCorrect(captchaElement) {
   const captchaImg = captchaElement.parentElement.querySelector(
     ".captcha-image > img"
@@ -244,10 +259,10 @@ function isCaptchaCorrect(captchaElement) {
   const numString = captchaImg.src.split("=")[1];
   const enteredValue = captchaElement.value;
 
-  if (enteredValue == "") {
+  if (enteredValue === "") {
     return false;
   } else {
-    return eval(numString) === Number(enteredValue);
+    return myEval(numString) === parseInt(enteredValue, 10);
   }
 }
 
