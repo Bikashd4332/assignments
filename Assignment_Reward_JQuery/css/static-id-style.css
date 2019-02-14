@@ -1,0 +1,93 @@
+#firstNameInput {
+  width: 300px;
+  margin: 20px 0px 5px 0px;
+}
+
+#lastNameInput {
+  width: 285px;
+  margin: 20px 0px 5px 4px;
+}
+
+#emailIdInput {
+  width: 350px;
+  margin: 20px 0px 5px;
+}
+
+#emailDomainInput {
+  width: 207px;
+  margin: 20px 0px 5px;
+}
+
+#AtSign {
+  font-size: 29px;
+  position: relative;
+  top: 5px;
+  font-weight: bold;
+  font-family: "Raleway";
+}
+
+#passwordInput {
+  width: 594px;
+  margin: 20px 0px 5px;
+}
+
+#passwordConfirmationInput {
+  width: 594px;
+  margin: 20px 0px 5px;
+  padding-right: 75px;
+}
+
+#primaryCellPhoneInput {
+  width: 292px;
+  margin: 20px 0px 5px 0px;
+}
+
+#secondaryCellPhoneInput {
+  width: 292px;
+  margin: 20px 0px 5px 5px;
+}
+
+#permanentAddressInput {
+  width: 594px;
+  margin: 20px 0px 5px;
+}
+
+#countrySelect {
+  width: 292px;
+  margin: 20px 0px 5px;
+}
+
+#permanentCountrySelect {
+  width: 292px;
+  margin: 20px 5px 5px 0px;
+}
+
+#currentStateInput {
+  width: 292px;
+  margin: 20px 0px 5px;
+}
+
+#permanentStateInput {
+  width: 292px;
+  margin: 20px 0px 5px 5px;
+}
+
+#permanentZipCodeInput {
+  width: 594px;
+  margin: 20px 0px 5px;
+}
+
+#currentZipCodeInput {
+  width: 594px;
+  margin: 20px 0px 5px;
+}
+
+#currentCountrySelect {
+  width: 292px;
+  margin: 20px 5px 5px 0px;
+}
+
+#currentAddressInput {
+  width: 594px;
+  margin: 20px 0px 5px;
+}

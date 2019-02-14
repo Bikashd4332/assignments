@@ -1,0 +1,41 @@
+.spinner-widget {
+  width: 150px;
+  height: 150px;
+  background-color: #f3f3f3;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.spinner-widget > .circle {
+  width: 115px;
+  height: 115px;
+  position: absolute;
+  border-radius: 50%;
+  top: 12%;
+  left: 12%;
+  z-index: 2;
+  background-color: #fff;
+}
+
+.spinner {
+  width: 80px;
+  position: absolute;
+  height: 80px;
+  transform: rotate(45deg);
+  background-color: skyblue;
+  left: -3%;
+  top: -1%;
+  transform-origin: 100% 100%;
+  animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(45deg);
+  }
+
+  to {
+    transform: rotate(405deg);
+  }
+}

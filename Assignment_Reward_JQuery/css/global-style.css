@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+/* defnied styling for fade in and fade out animation*/
+@import url("./animation-style.css");
+
+/* defined styling for popup window style.*/
+@import url("./popup-window.css");
+
+/* defined styling for styling CAPTCHA*/
+@import url("./captcha-element-style.css");
+
+/* defnied styling for form input elements (radio, input, select)*/
+@import url("./form-control-elements-style.css");
+
+/* defnied style for popup overlay (which appears as a container to show popup window)*/
+@import url("./popup-overlay.css");
+
+/* defined spinner widget for showing background process*/
+@import url("./spinner.css");
+
+/* This is defnied only because of the design decisions.*/
+@import url("./static-id-style.css");
+
+/* defnied styling for showing error toasts.*/
+@import url("./toast.css");
+
+/* defined styling for validation messages*/
+@import url("./validation-ui-style.css");
+
+body {
+  background: -webkit-linear-gradient(to bottom, #11998e, #38ef7d);
+  background: linear-gradient(to top, #11998e, #38ef8d);
+  font-family: "Balo Thambi", cursive;
+  margin: 0px;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+button {
+  cursor: pointer;
+  display: inline-block;
+  padding: 20px;
+  margin: 0px 0px 0px 15px;
+  font-size: 17px;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-family: "Raleway";
+  width: 40%;
+  outline: none;
+  color: white;
+  background: none;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  width: 600px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 30px;
+  margin: 30px auto;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.3);
+}
