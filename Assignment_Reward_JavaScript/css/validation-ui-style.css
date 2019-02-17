@@ -25,11 +25,11 @@
 
 .error-msg p {
   padding: 10px;
+  display: none;
   font-size: 15px;
-  text-align: center;
-  vertical-align: middle;
   z-index: 1;
   margin: 0;
+  white-space: nowrap;
   color: rgba(255, 255, 255, 1);
 }
 
