@@ -4,6 +4,7 @@
     "es6": true
   },
   "rules": {
-    "max-len": 1
+    "max-len": 1,
+    "linebreak-style": 0
   }
   }

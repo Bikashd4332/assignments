@@ -6,49 +6,48 @@ const popupService = new PopupWindow();
 $(document).ready(function() {
   spinnerService.hideInitial();
   popupService.hideInitial();
-  const formElements = document.querySelectorAll('.input-group  input');
-  const selectElements = document.querySelectorAll('.input-group  select');
-  const captchaElement = document.querySelector('.captcha-group > input');
-  const captchaRefresh = document.querySelector(
-      '.captcha-group .captcha-refresh'
-  );
-
-  const formElement = document.querySelector('form');
-  const passwordElements = document.querySelectorAll('.password-show-hide');
-  const passwordShowHideTriggers = document.querySelectorAll(
-      '.password-show-hide > .password-show, .password-hide'
-  );
 
   toastService.setToastParentElement(
-      document.querySelector('.toast-container')
+      $('.toast-container').get(0)
   );
-  formElements.forEach(( formElement )=> {
-    formElement.addEventListener('focus', showErrorOnFocus, false);
-    formElement.addEventListener('blur', hideErrorOnFocusOut, false);
-    formElement.addEventListener('input', removeInvalidIfValidOnInput, false);
-  });
 
-  selectElements.forEach( (selectElement) => {
-    selectElement.addEventListener(
-        'change',
-        removeInvalidIfValidOnSelect,
-        false
-    );
-  });
+  $('div.input-group > input.form-control')
+      .each(function(index, formElement) {
+        $(formElement).bind('focus', showErrorOnFocus);
+        $(formElement).bind('blur', hideErrorOnFocusOut);
+        $(formElement).bind('input', removeInvalidIfValidOnInput);
+        $(formElement).bind('blur', validationFeedbackOfInputOnFocusOut);
+      });
 
-  formElement.onsubmit = validation;
-  passwordElements.forEach((passwordElement) =>
-    passwordElement.addEventListener('input', passwordShowHide, false)
-  );
-  passwordShowHideTriggers.forEach((passwordShowHideTrigger) =>
-    passwordShowHideTrigger.addEventListener(
-        'click',
-        revealPasswordToggle,
-        false
-    )
-  );
-  captchaRefresh.addEventListener('click', captchaRefreshOnClick, false);
-  refreshCaptchaWithNewRandomValues(captchaElement);
+  $('div.input-group > select.form-control')
+      .each(function(index, selectElement) {
+        $(selectElement).bind('change', removeInvalidIfValidOnSelect);
+        $(selectElement).bind('blur', validationFeedbackOfSelectOnFocusOut);
+        if ( $(selectElement).prop('name').includes( 'Country' ) ) {
+          $(selectElement).bind('change', onSelectCountryPopulateState);
+          populateCountrySelectWithValues(selectElement);
+        }
+      });
+
+  $('form').bind('submit', validation);
+
+  $('div.password-show-hide > input.form-control')
+      .each(function(index, passwordElement) {
+        $(passwordElement).bind('input', passwordShowHide);
+        if (passwordElement.id === 'passwordInput') {
+          $(passwordElement).bind('blur', validationFeedbackOfPasswordOnFocusOut);
+        } else {
+          $(passwordElement).bind('blur', validationFeedbackOfPasswordConfirmationOnFocusOut);
+        }
+      });
+
+  $('.password-show, .password-hide')
+      .each(function(index, passwordShowHideTrigger) {
+        $(passwordShowHideTrigger).bind('click', revealPasswordToggle);
+      });
+
+  $('div.captcha-group > .captcha-refresh').bind('click', captchaRefreshOnClick);
+  refreshCaptchaWithNewRandomValues($('div.captcha-group input.captcha-element').get(0));
 });
 
 /**
@@ -65,16 +64,15 @@ function captchaRefreshOnClick(event) {
  *  @param {ClickEvent} event - The event object object.
  */
 function passwordShowHide(event) {
-  const parentPasswordShowHide = event.target.parentElement;
   const showPasswordIcon = $(event.target).parent('div.password-show-hide').find('a.password-show');
   const hidePasswordIcon = $(event.target).parent('div.password-show-hide').find('a.password-hide');
 
   if ($(event.target).attr('type') === 'password') {
     showPasswordIcon.css('display', 'block');
     hidePasswordIcon.css('display', 'none');
+
     if ($(event.target).val() === '') {
       showPasswordIcon.css('display', 'none');
-      hidePasswordIcon.css('display', 'none');
     }
   } else {
     showPasswordIcon.css('display', 'none');
@@ -89,25 +87,16 @@ function passwordShowHide(event) {
 function revealPasswordToggle(event) {
   const passwordShow = $(event.target).parent('div.password-show-hide').find('.password-show');
   const passwordHide = $(event.target).parent('div.password-show-hide').find('.password-hide');
+  const inputPasswordElement = $(event.target).parent('div.input-group').find('input.form-control');
 
-  if (event.target === passwordShow.get(0)){
-    $(passwordShow)
-        .css('display', 'none');
-    $(passwordHide)
-        .css('display', 'block');
-    $(event.target)
-        .parent('div.input-group')
-        .find('input.form-control')
-        .attr('type', 'text');
+  if (event.target === passwordShow.get(0)) {
+    $(passwordShow).css('display', 'none');
+    $(passwordHide).css('display', 'block');
+    inputPasswordElement.attr('type', 'text');
   } else {
-    $(passwordShow)
-        .css('display', 'block');
-    $(passwordHide)
-        .css('display', 'none');
-    $(event.target)
-        .parent('div.input-group')
-        .find('input.form-control')
-        .attr('type', 'password');
+    $(passwordShow).css('display', 'block');
+    $(passwordHide).css('display', 'none');
+    inputPasswordElement.attr('type', 'password');
   }
 }
 
@@ -117,39 +106,31 @@ function revealPasswordToggle(event) {
  * @param {FocusEvent} event - the focus event associated with the element.
  */
 function showErrorOnFocus(event) {
-  $(event.target)
-      .parent('div.input-group')
-      .find('div.error-msg > p.empty-msg')
-      .css('display', 'none');
-  $(event.target)
-      .parent('div.input-group')
-      .find('div.error-msg > p.invalid-msg')
-      .css('display', 'none');
+  const parentInputGroup = $(event.target).parent();
 
   if ($(event.target).hasClass('invalid')) {
+    parentInputGroup
+        .find('div.error-msg')
+        .css({
+          top: '-30px',
+          opacity: '1',
+        });
+
     if ($(event.target).prop('validity').valueMissing) {
-      $(event.target)
-          .parent('div.input-group')
-          .find('div.error-msg')
-          .css({
-            top: '-30px',
-            opacity: '1',
-          })
-          .find('p.empty-msg')
-          .css('display', 'block');
+      parentInputGroup.find('p.empty-msg').css('display', 'block');
+    } else {
+      if (event.target.id === 'passwordConfirmationInput') {
+        if ($('#passwordInput').val() === '') {
+          parentInputGroup.find('p.invalid-msg-two').css('display', 'block');
         } else {
-          $(event.target)
-              .parent('div.input-group')
-              .find('div.error-msg')
-              .css({
-                top: '-30px',
-                opacity: '1',
-              })
-              .find('p.invalid-msg')
-              .css('display', 'block');
+          parentInputGroup.find('p.invalid-msg').css('display', 'block');
+        }
+      } else {
+        parentInputGroup.find('p.invalid-msg').css('display', 'block');
       }
     }
   }
+}
 
 /**
  * @desc Does the exact opposite of the previous function.
@@ -158,11 +139,19 @@ function showErrorOnFocus(event) {
  * @param {FocusEvent} event - the focus event of corresponding element.
  */
 function hideErrorOnFocusOut(event) {
+  const parentInputGroup = $(event.target).parent();
   if ($(event.target).hasClass('invalid')) {
-      $(event.target).parent('div.input-group').find('div.error-msg').css({
-        top: '0px',
-        opacity: '0'
-      });
+    parentInputGroup.find('div.error-msg').css({
+      top: '0px',
+      opacity: '0',
+    });
+    setTimeout(() => {
+      parentInputGroup.find('.empty-msg').css('display', 'none');
+      parentInputGroup.find('.invalid-msg').css('display', 'none');
+      if (event.target.id === 'passwordConfirmationInput') {
+        parentInputGroup.find('.invalid-msg-two').css('display', 'none');
+      }
+    }, 300);
   }
 }
 
@@ -192,9 +181,9 @@ function removeInvalidIfValidOnInput(event) {
  * @param {SelectEvent} event - The select event fired from any select element.
  */
 function removeInvalidIfValidOnSelect(event) {
-  if ($(event.target).prop('selectedIndex') != 0) {
+  if ($(event.target).prop('selectedIndex') !== 0) {
     $(event.target).removeClass('invalid');
-    $(event.target).parent("div.input-group").find('i.error-icon').css('display', 'none');
+    $(event.target).parent('div.input-group').find('i.error-icon').css('display', 'none');
   }
 }
 
@@ -205,63 +194,42 @@ function removeInvalidIfValidOnSelect(event) {
  * @return {Boolean}
  */
 function validation() {
-  const passwordElements = document.querySelectorAll(
-      '.password-show-hide > input'
-  );
-
   let isAllValid = true;
+  let isAllRequiredFilled = true;
 
-  if ($('.invalid').length != 0) {
-    toastService.show('The form still has invalid values.');
+  if ($('.invalid').length !== 0) {
+    toastService.show('The form has invalid values.');
+    return false;
   }
 
-  $('body').find('div.input-group > input.form-control')
-      .each(function(index, formElement) {
-        const isValidElement = isValid(formElement);
-        if (!isValidElement) {
-          $(formElement).addClass('invalid');
-          $(formElement)
-              .parent('div.input-group')
-              .find('i.error-icon')
-              .css('display', 'block');
-          isAllValid = false;
+  $('input:required, select:required').each(
+      function(formControl) {
+        if (formControl instanceof HTMLInputElement && formControl.value === '') {
+          isAllRequiredFilled = false;
+        } else if (formControl instanceof HTMLSelectElement && formControl.selectedIndex === 0) {
+          isAllRequiredFilled = false;
         }
-      });
+      }
+  );
 
-  $('body').find('div.input-group  select.form-control')
-      .each(function(index, selectElement) {
-        if ($(selectElement).prop('selectedIndex') === 0 && $(selectElement).prop('required')) {
-          $(selectElement).addClass('invlaid');
-          $(selectElement)
-              .parent('div.input-group')
-              .find('i.error-icon')
-              .css('display', 'block');
-          isAllValid = false;
-        }
-      });
 
   $('body').find('div.input-group div.captcha-group > input.form-control')
-      .each( function( index, captchaElement ) {
+      .each( function(captchaElement ) {
         if ( !isCaptchaCorrect( captchaElement )) {
           isAllValid = false;
+          toastService.show('The captcha answer was incorrect.');
           refreshCaptchaWithNewRandomValues( captchaElement );
         }
       });
 
-  if ( !isPasswordMatched( passwordElements ) ) {
-    $(passwordElements[1])
-        .parent('div.input-group')
-        .find('i.error-icon')
-        .css({
-          'right': '55px',
-          'display': 'block',
-        });
-    $(passwordElements[1]).addClass('invalid');
-    isAllValid = false;
+  if (!isAllRequiredFilled) {
+    toastService.show('All the required fields are not filled yet.');
+    return false;
   }
 
-  if (isAllValid) {
-    sendFormDataToProcess($('body').find('form').get(0));
+  if (isAllValid && isAllRequiredFilled) {
+    sendFormDataToProcess($('form').get(0));
+    refreshCaptchaWithNewRandomValues($('div.captcha-group > input.form-control').get(0));
     $('body').find('form').get(0).reset();
   }
 
@@ -276,6 +244,11 @@ function validation() {
  * @return {Boolean}
  */
 function isValid(formElement) {
+  if (formElement.id === 'currentZipCodeInput' || formElement.id === 'permanentZipCodeInput' ) {
+    if (/0{5,6}/.test(formElement.value)) {
+      return false;
+    }
+  }
   if (formElement.validity.valid) {
     return true;
   }
@@ -286,12 +259,17 @@ function isValid(formElement) {
  * This function does a simple matching check if the entered the text
  * in the password inputElement matches with the passwordConfirmation
  * inputElement.
- * @param {Object[]} passwordElements - The array of the password inputElement.
- * @param {HTMLInputElement} - The password inputElement.
+ * @param {HTMLInputElement}  passwordElement - The password inputElement.
  * @return {Boolean}
  */
-function isPasswordMatched(passwordElements) {
-  return $(passwordElements[0]).val() === $(passwordElements[1]).val();
+function isPasswordMatched(passwordElement) {
+  const passwordInputString = $('#passwordInput').val();
+  const passwordInputConfirmationString = passwordElement.value;
+
+  if (passwordInputString === '' && passwordInputConfirmationString === '') {
+    return false;
+  }
+  return passwordInputConfirmationString === passwordInputString;
 }
 
 /**
@@ -310,6 +288,8 @@ function myEval(numString) {
       return firstOperand * secondOperand;
     case '/':
       return firstOperand / secondOperand;
+    case '+':
+      return firstoperand + secondOperand;
   }
 }
 
@@ -323,9 +303,8 @@ function myEval(numString) {
 function isCaptchaCorrect(captchaElement) {
   const numString = $(captchaElement)
       .parent('div.captcha-group')
-      .find('div.captcha-image > img')
-      .attr('src')
-      .split('=')[1];
+      .find('div.captcha-image > p')
+      .text();
   const enteredValue = $(captchaElement).val();
 
   if (enteredValue === '') {
@@ -341,11 +320,9 @@ function isCaptchaCorrect(captchaElement) {
  * inside the captcha-group
  */
 function refreshCaptchaWithNewRandomValues(captchaElement) {
-  const captchaURL = 'https://dummyimage.com/100x40/E1F3F1/f0731f.gif&text=';
-
   const getRandomOperator = () => {
-    const operators = ['-', '*', '/'];
-    return operators[Math.floor(Math.random(1, 9) * 3)];
+    const operators = ['-', '*', '/', '+'];
+    return operators[Math.floor(Math.random(1, 9) * 4)];
   };
 
   const getRandomOperands = () => {
@@ -371,11 +348,9 @@ function refreshCaptchaWithNewRandomValues(captchaElement) {
     firstRandomOperand = getRandomOperands();
     secondRandomOperand = getRandomOperands();
   }
-  $(captchaElement)
-      .parent('div.captcha-group')
-      .find('div.captcha-image > img')
-      .attr('src',
-          captchaURL +
+
+  $('div.captcha-image > p')
+      .text(
           firstRandomOperand +
           randomOperator +
           secondRandomOperand);
@@ -479,7 +454,7 @@ Spinner.prototype.hideInitial = function() {
  */
 Spinner.prototype.toggleSpinner = function() {
   if (this.__proto__.isShown === false) {
-    $('body').find('div.popup-overlay-spinner').show();
+    $('body').find('div.popup-overlay-spinner').show().css('display', 'flex');
     $('body').find('div.popup-overlay-spinner').find('div.spinner-widget').show();
     $('body').find('div.spinner-widget').removeClass('animate-out').addClass('animate-in');
     this.__proto__.isShown = true;
@@ -538,7 +513,7 @@ PopupWindow.prototype.showPopup = function(
   $('div.popup').find('div.popup-header > h2').text(messageHeader);
   $('div.popup').find('div.popup-body > p').text(messageBody);
   $('div.popup > a.popup-button:nth-of-type(1)')
-      .on('click', function() {
+      .bind('click', function() {
         $('div.popup').removeClass('animate-in').addClass('animate-out');
         setTimeout(() => {
           $('body').find('div.popup-overlay-window').find('div.popup').hide();
@@ -549,7 +524,7 @@ PopupWindow.prototype.showPopup = function(
         }, 300);
       });
   $('div.popup > a.popup-button:nth-of-type(2)')
-      .on('click', function() {
+      .bind('click', function() {
         $('div.popup').addClass('animate-out').removeClass('animate-in');
         setTimeout(() => {
           $('body').find('div.popup-overlay-window').find('div.popup').hide();
@@ -559,7 +534,7 @@ PopupWindow.prototype.showPopup = function(
           }
         }, 300);
       });
-  $('div.popup-overlay-window').show();
+  $('div.popup-overlay-window').show().css('display', 'flex');
   $('div.popup-overlay-window').find('div.popup').show();
   $('div.popup').addClass('animate-in').removeClass('animate-out');
 };
@@ -582,8 +557,7 @@ function sendFormDataToProcess(formElement) {
       const jsonResponseData = JSON.parse(responseData);
       popupService.showPopup(
           'Registration Successfull',
-          'Thanks for signing up, your' +
-          ' details have been successfully stored.',
+          'Thank you for signing up we\'ve got all of your details stored.',
           () => console.log('Pressed OK'),
           () => console.log('Pressed Close')
       );
@@ -601,4 +575,162 @@ function sendFormDataToProcess(formElement) {
       );
     },
   });
+}
+
+/**
+ * This function validates it self with the value
+ * as soon as the the input element loses its focus.
+ * @param {FocusEvent} event - This focus event generated by HTMLInputEelements.
+ */
+function validationFeedbackOfInputOnFocusOut(event) {
+  const isValidElement = isValid( event.target );
+  if ( !isValidElement ) {
+    $(event.target).addClass( 'invalid' );
+    $(event.target).parent('div.input-group').find('.error-icon').css('display', 'block');
+  }
+}
+
+/**
+ * This funciton also validates its own selection as soon as
+ * loses its focus.
+ * @param {FocusEvent} event - This is the event generated
+ *  by HTMLSelectElements.
+ */
+function validationFeedbackOfSelectOnFocusOut( event ) {
+  if ( event.target.selectedIndex === 0 && event.target.required ) {
+    $(event.target)
+        .addClass('invalid')
+        .parent('div.input-group')
+        .find('.error-icon').css('display', 'block');
+  }
+}
+
+/**
+ * This function handles the selection in the country select element and
+ * loads new states values inside the state select element.
+ * @param {SelectEvent} event - The select event
+ * generated by the HTMLSelectElement.
+ */
+function onSelectCountryPopulateState(event) {
+  const siblingInputGroup = event.target.parentElement.nextElementSibling;
+  const stateSelectinput = $(siblingInputGroup).find('select.form-control');
+  const selectedCountryString = event.target.value;
+  let stateList = [];
+  getStateList( selectedCountryString )
+      .then(function(states) {
+        stateList = [...states];
+        stateList.unshift(' Select State' );
+        stateSelectinput.find('option').remove();
+        stateList.forEach(function(stateString, index) {
+          stateSelectinput.attr('disabled', false);
+          const optionElement = $('<option></option>');
+          optionElement.attr('value', stateString);
+          optionElement.text(stateString);
+          if ( index === 0 ) {
+            optionElement.attr('selected', true);
+          }
+          stateSelectinput.append(optionElement);
+        });
+      }).catch(function(errorReason) {
+        toastService.show('There\'s some problem fetching the list of state');
+      });
+}
+/**
+ * This is a helper function providing the list of states by an
+ * ajax call.
+ * @param {String} countryName - The name of the country for
+ * which state lists need to be fetched.
+ * @return {Promise} - Returns a promise of the ajax request.
+ */
+function getStateList( countryName ) {
+  const myPromise = new Promise( function(resolve, reject) {
+    $.getJSON('/js/country_state_json/gistfile1.json', function(jsonData) {
+      jsonData.countries.forEach(function(countryObj) {
+        if (countryObj.country === countryName) {
+          resolve(countryObj.states);
+        }
+      });
+    });
+  });
+  return myPromise;
+}
+
+/**
+ * @desc The function does add all the list of country into the country
+ * select dyanimcally. This saves a huge lines in html without hardcoding.
+ * @param {HMLTSelectElement} countrySelectElemnet - The country
+ * select element which is loaded with a huge list of countries.
+ */
+function populateCountrySelectWithValues(countrySelectElemnet) {
+  $.getJSON('/js/country_state_json/gistfile1.json', function(responseJson) {
+    responseJson.countries.forEach(function(countryObj) {
+      $(countrySelectElemnet)
+          .append(
+              $('<option></option>')
+                  .attr('value', countryObj.country)
+                  .text(countryObj.country)
+          );
+    });
+  });
+}
+/**
+ * This function validates the password on focus out.
+ * @param {FocusEvent} event - This is Focus event
+ * generated by password elements.
+ */
+function validationFeedbackOfPasswordOnFocusOut( event ) {
+  if (!validatePassword(event.target)) {
+    const errorIcon = $(event.target).parent('div.input-group').find('.error-icon');
+    $(event.target).addClass('invalid');
+
+    if ($(event.target).val() !== '') {
+      errorIcon.css({
+        'display': 'block',
+        'right': '55px',
+      });
+    } else {
+      errorIcon.css({
+        'display': 'block',
+        'right': '10px',
+      });
+    }
+  }
+}
+
+/**
+ * This function validates password confirmation input.
+ * @param {FocusEvent} event - This event is generated by the
+ * passwordConfimration input.
+ */
+function validationFeedbackOfPasswordConfirmationOnFocusOut(event) {
+  if (!isPasswordMatched( event.target )) {
+    const errorIcon = $(event.target).parent('div.input-group').find('.error-icon');
+    $(event.target).addClass('invalid');
+    if ( event.target.value !== '' ) {
+      errorIcon.css({
+        'display': 'block',
+        'right': '55px',
+      });
+    } else {
+      errorIcon.css({
+        'display': 'block',
+        'right': '10px',
+      });
+    }
+  }
+}
+/**
+ * This function validates the password field by
+ * matching the value with the regular expression.
+ * @param {HTMLInputElement} passwordElement - The password which is validated.
+ * @return {Boolean} - it retuns a true if matched else false otherwise.
+ */
+function validatePassword(passwordElement) {
+  const enteredValue = $(passwordElement).val();
+  const specialCharacterRegExp = /[^a-zA-Z0-9\s]/;
+  const alphaNumericTestRegExp = /[a-zA-Z0-9]/;
+
+  return specialCharacterRegExp.test(enteredValue)
+      && alphaNumericTestRegExp.test(enteredValue)
+      && enteredValue.length >= 8;
 }

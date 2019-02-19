@@ -168,7 +168,6 @@ function showErrorOnFocus(event) {
         if ( passwordElement.value === '') {
           const invalidMsgTwo =
           event.target.parentElement.querySelector('.invalid-msg-two');
-
           invalidMsgTwo.style.display = 'block';
         } else {
           invalidMsg.style.display = 'block';
@@ -309,11 +308,47 @@ function validation() {
  * @return {Boolean}
  */
 function isValid(formElement) {
+  if ( formElement.id === 'currentZipCodeInput' || formElement === 'permanentZipCodeInput') {
+    if ( /0{5,6}/.test(formElement.value )) {
+      console.log('executing');
+      return false;
+    }
+  }
   if (formElement.validity.valid) {
     return true;
   }
   return false;
 }
+
+/**
+ * This validates the provided zip code string. (Only India for now).
+ * @param {String} pincode - The string of the pincode
+ * which is being validated.
+ * @return {Promise} - returns a promise of the request.
+ */
+// function validatePinCode(pincode) {
+//   return new Promise((resolve, reject) => {
+//     if (/^0+$/.test(pincode)) {
+//       reject(new Error('Pincode Can\'t have all zeros'));
+//     } else {
+//       const myValidationRequest = new XMLHttpRequest();
+//       myValidationRequest.onreadystatechange = () => {
+//         if (myValidationRequest.readyState === 4) {
+//           if (myValidationRequest.readyState === 200) {
+//             const jsonString = myValidationRequest.response; 
+//             console.log(jsonString);
+//             const stateName = JSON.parse(jsonString).PostOffice[0].State;
+//             resolve(stateName);
+//           } else {
+//             reject(new Error('Pincode can\'t be validated'));
+//           }
+//         }
+//       };
+//       myValidationRequest.open('GET', 'https://postalpincode.in/api/pincode/' + pincode, true);
+//       myValidationRequest.send();
+//     }
+//   });
+// }
 
 /**
  * This function validates the password field by
@@ -397,7 +432,7 @@ function isCaptchaCorrect(captchaElement) {
 function refreshCaptchaWithNewRandomValues(captchaElement) {
   const parentCaptchaInputGroup = captchaElement.parentElement;
   const captchaImgDiv = parentCaptchaInputGroup.querySelector(
-    '.captcha-image > p'
+      '.captcha-image > p'
   );
 
   const getRandomOperator = () => {
@@ -764,12 +799,11 @@ function validationFeedbackOfPasswordOnFocusOut( event ) {
     const parentInputGroup = event.target.parentElement;
     const errorIcon = parentInputGroup.querySelector( '.error-icon' );
     event.target.classList.add( 'invalid' );
+    errorIcon.style.display = 'block';
 
     if ( event.target.value !== '' ) {
-      errorIcon.style.display = 'block';
       errorIcon.style.right = '55px';
     } else {
-      errorIcon.style.display = 'block';
       errorIcon.style.right = '10px';
     }
   }
@@ -880,7 +914,7 @@ function onSelectCountryPopulateState( event ) {
 
 /**
  * @desc The function does add all the list of country into the country
- * list dyanimcally. This saves a huge lines in html without hardcoding.
+ * select dyanimcally. This saves a huge lines in html without hardcoding.
  * @param {HMLTSelectElement} countrySelectElemnet - The country
  * select element which is loaded with a huge list of countries.
  */

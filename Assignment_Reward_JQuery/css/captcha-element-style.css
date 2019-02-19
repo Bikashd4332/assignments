@@ -38,3 +38,12 @@
   top: 3px;
   left: 10px;
 }
+.captcha-group > .captcha-image > p {
+  position: relative;
+  font-family: "Raleway";
+  font-size: 30px;
+  top: 40px;
+  color: orange;
+  padding: 15px;
+  letter-spacing: 2px;
+}
