@@ -313,6 +313,10 @@ function isValid(formElement) {
       console.log('executing');
       return false;
     }
+  } else if (formElement.id === 'primaryCellPhoneInput' || formElement.id === 'secondaryCellPhoneInput') {
+    if (/0{10}/.test(formElement.value)) {
+      return false;
+    }
   }
   if (formElement.validity.valid) {
     return true;
@@ -400,6 +404,8 @@ function myEval(numString) {
       return firstOperand * secondOperand;
     case '/':
       return firstOperand / secondOperand;
+    case '+':
+      return firstOperand + secondOperand;
   }
 }
 

@@ -31,7 +31,7 @@
         <div class="input-group">
           <div class="error-msg" >
             <p class="invalid-msg">No Special Characters are allowed except alpahabets and apostrophe.</p>
-            <p class="empty-msg">First Name Can't Be Left Blank.</p>
+            <p class="empty-msg">First Name Can't Be Left Blank. It's required.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle top error-icon"></i>
@@ -41,6 +41,7 @@
             class="form-control"
             required
             placeholder="First Name *"
+            maxlength="30"
             name="firstName"
             pattern="([a-zA-Z]+[\s\.']?)+"
           />
@@ -58,6 +59,8 @@
             id="lastNameInput"
             required
             class="form-control"
+            min="5"
+            maxlength="30"
             name="lastName"
             placeholder="Last Name *"
             pattern="([a-zA-Z]'?)+"
@@ -67,7 +70,7 @@
         <div class="input-group">
           <div class="error-msg">
             <p class="invalid-msg">This Field Starts With Alphabets and Only May Contain . Or [0-9] In Between.</p>
-            <p class="empty-msg">You Can Not Omit Username part.</p>
+            <p class="empty-msg">You Can Not Omit Username Part of Your Mail.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -76,6 +79,7 @@
             required
             class="form-control"
             name="emailId"
+            maxlength="50"
             id="emailIdInput"
             placeholder="Email *"
             pattern="^[a-zA-Z]+(\.?[a-zA-Z0-9]+)+"
@@ -86,7 +90,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="invalid-msg">Invalid Domain Entered.</p>
+            <p class="invalid-msg">The Domain Dosen't Seem To Exist.</p>
             <p class="empty-msg">Domain Can't Be Empty.</p>
             <i class="sqare"></i>
           </div>
@@ -104,7 +108,7 @@
         <div class="input-group password-show-hide">
           <div class="error-msg">
             <p class="empty-msg">Password Field Must Be Filled Up.</p>
-            <p class="invalid-msg">Password Should Contain At Least One Special Character and Should Be Between 8 and 32.</p>
+            <p class="invalid-msg">Password Must Contain At Least One Special Character and Must Be Between 8 and 32.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -172,8 +176,8 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">Phone number must be filled up.</p>
-            <p class="invalid-msg">This Field Can Only Have Numbers and an Optional Area Code.</p>
+            <p class="empty-msg">Phone Number Must Be Filled Up.</p>
+            <p class="invalid-msg">This Field Can Only Have Numbers and an Optional Area Code With +.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -190,7 +194,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="invalid-msg">This Field Can Only Have Numbers and an Optional + For Area Code.</p>
+            <p class="invalid-msg">This Field Can Only Have Numbers and an Optional Area Code With +.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -205,7 +209,7 @@
 	</div>
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">This is needed so that we can reach you.</p>
+            <p class="empty-msg">This Is Needed So That We Can Reach You.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -213,6 +217,8 @@
             type="text"
             required
             class="form-control"
+            minlength="10"
+            minlength="150"
             id="currentAddressInput"
             name="currentAddress"
             placeholder="Current Address *"
@@ -221,7 +227,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">Please select your current Country.</p>
+            <p class="empty-msg">Please Select Your Country.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -233,8 +239,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">This can not be left.</p>
-            <p class="invalid-msg">State consists of only alphabets, right!</p>
+            <p class="empty-msg">This Can't Be Left Blank.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -252,8 +257,8 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">Zip code must be filled up.</p>
-            <p class="invalid-msg">Invalid zip code detected.</p>
+            <p class="empty-msg">Zip Code Must Be Filled Up.</p>
+            <p class="invalid-msg">Invlaid Zip Code Detected.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -269,34 +274,24 @@
         </div>
 
         <div class="input-group">
-          <div class="error-msg">
-            <p class="empty-msg">Address needs to be filled up.</p>
-            <i class="sqare"></i>
-          </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
           <input
             type="text"
             class="form-control"
+            maxlength="150"
+            minlengt="5"
             id="permanentAddressInput"
             name="permanentAddress"
             placeholder="Permanent Address"
           />
         </div>
         <div class="input-group">
-          <div class="error-msg">
-            <p class="empty-msg">Please select your permanent country.</p>
-          </div>
-          <i class="fa fa-exclamation-circle error-icon"></i>
           <select name="permanentCountry" id="countrySelect" class="form-control">
             <option value="0" selected>Select Country</option>
           </select>
         </div>
 
         <div class="input-group">
-          <div class="error-msg">
-            <p class="invalid-msg">This state name is invalid.</p>
-            <i class="sqare"></i>
-          </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
           <select
             class="form-control"
@@ -310,7 +305,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="invalid-msg">The Entered pin is invalid.</p>
+            <p class="invalid-msg">Invlaid Zip Code Detected.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -341,7 +336,7 @@
           </div>
         </div>
         <div class="captcha-group">
-          <div class="captcha-label">Please Fill the CAPTCHA.</div>
+          <div class="captcha-label">Please Fill The CAPTCHA.</div>
           <div class="captcha-image">
             <p></p>
           </div>

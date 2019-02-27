@@ -173,7 +173,7 @@ function removeInvalidIfValidOnInput(event) {
     }
   }
 }
-
+-
 /**
  * @desc The function makes required select element valid on
  * user select if the select was previously invalid.
@@ -203,7 +203,7 @@ function validation() {
   }
 
   $('input:required, select:required').each(
-      function(formControl) {
+      function(index, formControl) {
         if (formControl instanceof HTMLInputElement && formControl.value === '') {
           isAllRequiredFilled = false;
         } else if (formControl instanceof HTMLSelectElement && formControl.selectedIndex === 0) {
@@ -214,7 +214,7 @@ function validation() {
 
 
   $('body').find('div.input-group div.captcha-group > input.form-control')
-      .each( function(captchaElement ) {
+      .each( function(index, captchaElement ) {
         if ( !isCaptchaCorrect( captchaElement )) {
           isAllValid = false;
           toastService.show('The captcha answer was incorrect.');
@@ -246,6 +246,10 @@ function validation() {
 function isValid(formElement) {
   if (formElement.id === 'currentZipCodeInput' || formElement.id === 'permanentZipCodeInput' ) {
     if (/0{5,6}/.test(formElement.value)) {
+      return false;
+    }
+  } else if (formElement.id === 'primaryCellPhoneInput' || formElement.id === 'secondaryCellPhoneInput') {
+    if (/0{10}/.test(formElement.value)) {
       return false;
     }
   }

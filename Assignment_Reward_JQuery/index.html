@@ -27,7 +27,7 @@
     </div>
 
     <!-- Added this html structrue to optimize dynamic content generation-->
-    <div class="popup-overlay-window">
+    <!-- <div class="popup-overlay-window">
       <div class="popup">
         <div class="popup-header">
           <h2></h2>
@@ -40,13 +40,13 @@
       </div>
     </div>
     
-    <!-- Added this html structrue to optimize dynamic content generatoin-->
-    <div class="popup-overlay-spinner">
+     Added this html structrue to optimize dynamic content generatoin-->
+    <!-- <div class="popup-overlay-spinner">
         <div class="spinner-widget">
           <i class="circle"></i>
           <div class="spinner"></div>
         </div>
-    </div>
+    </div> -->
 
     <div class="container">
       <div class="fa fa-user-circle-o form-icon" aria-hidden="true"></div>
@@ -54,7 +54,7 @@
         <div class="input-group">
           <div class="error-msg" >
             <p class="invalid-msg">No Special Characters are allowed except alpahabets and apostrophe.</p>
-            <p class="empty-msg">First Name Can't Be Left Blank.</p>
+            <p class="empty-msg">First Name Can't Be Left Blank. It's required.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle top error-icon"></i>
@@ -63,6 +63,7 @@
             id="firstNameInput"
             class="form-control"
             required
+            maxlength="30"
             placeholder="First Name *"
             name="firstName"
             pattern="([a-zA-Z]+[\s\.']?)+"
@@ -81,6 +82,7 @@
             id="lastNameInput"
             required
             class="form-control"
+            maxlength="30"
             name="lastName"
             placeholder="Last Name *"
             pattern="([a-zA-Z]'?)+"
@@ -100,6 +102,7 @@
             class="form-control"
             name="emailId"
             id="emailIdInput"
+            maxlength="50"
             placeholder="Email *"
             pattern="^[a-zA-Z]+(\.?[a-zA-Z0-9]+)+"
           />
@@ -109,7 +112,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="invalid-msg">Invalid Domain Entered.</p>
+            <p class="invalid-msg">The Domain Dosen't Seem To Exist.</p>
             <p class="empty-msg">Domain Can't Be Empty.</p>
             <i class="sqare"></i>
           </div>
@@ -127,7 +130,7 @@
         <div class="input-group password-show-hide">
           <div class="error-msg">
             <p class="empty-msg">Password Field Must Be Filled Up.</p>
-            <p class="invalid-msg">Password Should Contain At Least One Special Character and Should Be Between 8 and 32.</p>
+            <p class="invalid-msg">Password Must Contain At Least One Special Character and Must Be Between 8 and 32.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -195,8 +198,8 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">Phone number must be filled up.</p>
-            <p class="invalid-msg">This Field Can Only Have Numbers and an Optional Area Code.</p>
+            <p class="empty-msg">Phone Number Must be Filled Up.</p>
+            <p class="invalid-msg">This Field Can Only Have Numbers and an Optional Area Code With +.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -213,7 +216,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="invalid-msg">This Field Can Only Have Numbers and an Optional + For Area Code.</p>
+            <p class="invalid-msg">This Is Needed So That We Can Reach You.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -228,6 +231,7 @@
 	</div>
         <div class="input-group">
           <div class="error-msg">
+            <p class="invalid-msg">Please enter a valid address.</p>
             <p class="empty-msg">This is needed so that we can reach you.</p>
             <i class="sqare"></i>
           </div>
@@ -235,6 +239,8 @@
           <input
             type="text"
             required
+            minlength="5"
+            maxlength="150"
             class="form-control"
             id="currentAddressInput"
             name="currentAddress"
@@ -244,7 +250,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">Please select your current Country.</p>
+            <p class="empty-msg">Please Select Your Country.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -256,8 +262,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">This can not be left.</p>
-            <p class="invalid-msg">State consists of only alphabets, right!</p>
+            <p class="empty-msg">This Can't Be Left Blank.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -275,8 +280,8 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">Zip code must be filled up.</p>
-            <p class="invalid-msg">Invalid zip code detected.</p>
+            <p class="empty-msg">Zip Code Must Be Filled Up.</p>
+            <p class="invalid-msg">Invalid Zip Code Detected.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -293,12 +298,14 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="empty-msg">Address needs to be filled up.</p>
+            <p class="invalid-msg">Please Enter A Valid Address.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
           <input
             type="text"
+            minlength="5"
+            maxlength="150"
             class="form-control"
             id="permanentAddressInput"
             name="permanentAddress"
@@ -306,20 +313,12 @@
           />
         </div>
         <div class="input-group">
-          <div class="error-msg">
-            <p class="empty-msg">Please select your permanent country.</p>
-          </div>
-          <i class="fa fa-exclamation-circle error-icon"></i>
           <select name="permanentCountry" id="countrySelect" class="form-control">
             <option value="0" selected>Select Country</option>
           </select>
         </div>
 
         <div class="input-group">
-          <div class="error-msg">
-            <p class="invalid-msg">This state name is invalid.</p>
-            <i class="sqare"></i>
-          </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
           <select
             class="form-control"
@@ -333,7 +332,7 @@
 
         <div class="input-group">
           <div class="error-msg">
-            <p class="invalid-msg">The Entered pin is invalid.</p>
+            <p class="invalid-msg">Invalid Pin Code Detected.</p>
             <i class="sqare"></i>
           </div>
           <i class="fa fa-exclamation-circle error-icon"></i>
@@ -364,7 +363,7 @@
           </div>
         </div>
         <div class="captcha-group">
-          <div class="captcha-label">Please Fill the CAPTCHA.</div>
+          <div class="captcha-label">Please Fill The CAPTCHA.</div>
           <div class="captcha-image">
             <p></p>
           </div>

@@ -11,8 +11,8 @@
 
 .error-msg {
   position: absolute;
-  opacity: 0;
-  top: 0px;
+  opacity: 1;
+  top: -30px;
   border-radius: 5px;
   z-index: 1;
   font-family: "Raleway";
