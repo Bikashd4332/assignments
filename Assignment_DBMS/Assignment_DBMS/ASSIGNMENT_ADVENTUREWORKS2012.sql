@@ -64,7 +64,8 @@ SELECT SOD.OrderQty, P.ListPrice, P.Name
 	SOH.SalesOrderID = SOD.SalesOrderID  
 	INNER JOIN 
 	[Production].[Product] P 
-	ON  SOD.ProductID = P.ProductID;
+	ON  SOD.ProductID = P.ProductID
+	WHERE SOH.CustomerID = 635;
 
 /* SELECTING THE PRODUCT OF WHICH ARE SUBCATEGORY OF 'Cranksets' AND SOLD IN THE CITY LONDON. */
 
