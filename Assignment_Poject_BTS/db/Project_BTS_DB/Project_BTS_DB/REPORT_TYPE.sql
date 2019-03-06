@@ -1,0 +1,9 @@
+USE DB_BTS;
+
+CREATE TABLE [REPORT_TYPE]
+	(
+		[ReportTypeID] INTEGER IDENTITY(1, 1) NOT NULL,
+		[Title] VARCHAR(20) NOT NULL,
+		[Description] VARCHAR (200)
+		CONSTRAINT PK_ReportTypeID PRIMARY KEY (ReportTypeID)
+	);
